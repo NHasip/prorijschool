@@ -17,6 +17,14 @@ In Plesk Git deployment, set this command:
 bash scripts/plesk-deploy.sh
 ```
 
+If you use Scheduled Tasks (without SSH), run:
+
+```bash
+/bin/bash -lc 'cd ~/prorijschool.necmardemo.nl && bash scripts/plesk-deploy.sh > deploy.log 2>&1'
+```
+
+Then inspect `deploy.log` in File Manager.
+
 ## 3. Required production `.env` values
 
 ```env
