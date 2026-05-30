@@ -8,19 +8,19 @@ echo "==> Starting Laravel deploy in: $ROOT_DIR"
 
 PHP_BIN="${PHP_BIN:-}"
 if [[ -z "$PHP_BIN" ]]; then
-  if command -v php >/dev/null 2>&1; then
+  for candidate in \
+    /opt/plesk/php/8.4/bin/php \
+    /opt/plesk/php/8.3/bin/php \
+    /opt/plesk/php/8.2/bin/php \
+    /opt/plesk/php/8.1/bin/php; do
+    if [[ -x "$candidate" ]]; then
+      PHP_BIN="$candidate"
+      break
+    fi
+  done
+
+  if [[ -z "$PHP_BIN" ]] && command -v php >/dev/null 2>&1; then
     PHP_BIN="$(command -v php)"
-  else
-    for candidate in \
-      /opt/plesk/php/8.4/bin/php \
-      /opt/plesk/php/8.3/bin/php \
-      /opt/plesk/php/8.2/bin/php \
-      /opt/plesk/php/8.1/bin/php; do
-      if [[ -x "$candidate" ]]; then
-        PHP_BIN="$candidate"
-        break
-      fi
-    done
   fi
 fi
 
@@ -30,10 +30,10 @@ if [[ -z "$PHP_BIN" || ! -x "$PHP_BIN" ]]; then
 fi
 
 COMPOSER_CMD=()
-if command -v composer >/dev/null 2>&1; then
-  COMPOSER_CMD=("$(command -v composer)")
-elif [[ -f /usr/lib/plesk-9.0/composer.phar ]]; then
+if [[ -f /usr/lib/plesk-9.0/composer.phar ]]; then
   COMPOSER_CMD=("$PHP_BIN" "/usr/lib/plesk-9.0/composer.phar")
+elif command -v composer >/dev/null 2>&1; then
+  COMPOSER_CMD=("$(command -v composer)")
 else
   echo "ERROR: Composer not found (composer command or /usr/lib/plesk-9.0/composer.phar)."
   exit 1
