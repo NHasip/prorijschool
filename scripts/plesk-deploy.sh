@@ -33,7 +33,7 @@ COMPOSER_CMD=()
 if [[ -f /usr/lib/plesk-9.0/composer.phar ]]; then
   COMPOSER_CMD=("$PHP_BIN" "/usr/lib/plesk-9.0/composer.phar")
 elif command -v composer >/dev/null 2>&1; then
-  COMPOSER_CMD=("$(command -v composer)")
+  COMPOSER_CMD=("$PHP_BIN" "$(command -v composer)")
 else
   echo "ERROR: Composer not found (composer command or /usr/lib/plesk-9.0/composer.phar)."
   exit 1
