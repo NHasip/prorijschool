@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Middleware\EnsureApproved;
+use App\Http\Middleware\EnsureRole;
+use App\Http\Middleware\EnsureTwoFactorVerified;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'approved' => EnsureApproved::class,
+            'role' => EnsureRole::class,
+            '2fa.verified' => EnsureTwoFactorVerified::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(
