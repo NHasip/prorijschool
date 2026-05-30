@@ -1,0 +1,343 @@
+<!DOCTYPE html><html class="light" lang="nl"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Instructeurs Beheren - Momentum Drive</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-primary-container": "#00391a",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed-variant": "#474746",
+                    "on-secondary-container": "#636262",
+                    "on-tertiary-container": "#2d3130",
+                    "inverse-surface": "#263334",
+                    "outline-variant": "#bccabc",
+                    "secondary": "#5f5e5e",
+                    "primary-container": "#27ae60",
+                    "primary": "#006d37",
+                    "tertiary-fixed-dim": "#c4c7c5",
+                    "on-surface": "#121e1f",
+                    "surface-container-low": "#e9f6f7",
+                    "outline": "#6d7a6e",
+                    "secondary-container": "#e2dfde",
+                    "surface-container-highest": "#d8e5e6",
+                    "primary-fixed": "#7efba4",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#61de8a",
+                    "surface-variant": "#d8e5e6",
+                    "secondary-fixed-dim": "#c8c6c5",
+                    "on-background": "#121e1f",
+                    "error-container": "#ffdad6",
+                    "primary-fixed-dim": "#61de8a",
+                    "inverse-on-surface": "#e6f3f4",
+                    "surface-bright": "#eefcfd",
+                    "tertiary-container": "#959998",
+                    "surface-container": "#e3f0f1",
+                    "error": "#ba1a1a",
+                    "tertiary": "#5b5f5e",
+                    "on-tertiary-fixed": "#181c1b",
+                    "tertiary-fixed": "#e0e3e1",
+                    "surface-dim": "#cfdddd",
+                    "on-error-container": "#93000a",
+                    "on-primary-fixed": "#00210c",
+                    "secondary-fixed": "#e5e2e1",
+                    "on-secondary-fixed": "#1c1b1b",
+                    "surface-tint": "#006d37",
+                    "surface-container-lowest": "#ffffff",
+                    "on-tertiary-fixed-variant": "#434846",
+                    "on-primary-fixed-variant": "#005228",
+                    "surface-container-high": "#ddebec",
+                    "background": "#eefcfd",
+                    "on-secondary": "#ffffff",
+                    "surface": "#eefcfd",
+                    "on-surface-variant": "#3d4a3f",
+                    "on-error": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1200px",
+                    "base": "8px",
+                    "xs": "4px",
+                    "xl": "80px",
+                    "sm": "12px",
+                    "md": "24px",
+                    "lg": "48px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg-mobile": ["Montserrat"],
+                    "body-md": ["Inter"],
+                    "headline-sm": ["Montserrat"],
+                    "headline-md": ["Montserrat"],
+                    "label-sm": ["Inter"],
+                    "display-lg": ["Montserrat"],
+                    "headline-md-mobile": ["Montserrat"]
+            },
+            "fontSize": {
+                    "label-md": ["14px", {"lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                    "headline-sm": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                    "headline-md": ["32px", {"lineHeight": "1.25", "fontWeight": "600"}],
+                    "label-sm": ["12px", {"lineHeight": "1.4", "fontWeight": "500"}],
+                    "display-lg": ["48px", {"lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md-mobile": ["24px", {"lineHeight": "1.3", "fontWeight": "600"}]
+            }
+          }
+        }
+      }
+    </script>
+</head>
+<body class="text-on-background font-body-md text-body-md antialiased min-h-screen bg-surface-container-lowest">
+<!-- SideNavBar (Shared Component) -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 text-primary border-r border-outline-variant py-md px-sm z-50 bg-surface-container-lowest">
+<div class="mb-lg px-sm">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Instructeur Portaal</h1>
+<p class="font-label-sm text-label-sm text-secondary mt-xs">Rijschool Momentum</p>
+</div>
+<div class="flex-grow space-y-sm">
+<!-- Active Tab: Instellingen (Assuming Admin view lives here as fallback) -->
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">group</span>
+<span class="font-label-md text-label-md">Mijn Leerlingen</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">calendar_month</span>
+<span class="font-label-md text-label-md">Lesplanning</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">list_alt</span>
+<span class="font-label-md text-label-md">RIS Modules</span>
+</a>
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-primary font-bold border-r-4 border-primary bg-surface-container-low opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-md text-label-md">Instellingen</span>
+</a>
+</div>
+<div class="mt-auto px-sm pt-md border-t border-outline-variant">
+<button class="w-full flex items-center justify-center gap-sm py-sm px-sm bg-primary-container text-on-primary-container rounded-lg font-label-md text-label-md hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">add</span>
+                Nieuwe Les Inplannen
+            </button>
+<div class="mt-md flex items-center gap-sm">
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden" data-alt="A professional headshot of a driving instructor, smiling warmly in a modern office setting. The lighting is bright and natural, reflecting a clean, corporate light-mode aesthetic. The color palette emphasizes crisp whites and subtle cool tones to convey trust and professionalism.">
+<img alt="Instructeur Profielfoto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4le0svKbTDlDo_3_sg1CN49Upwor4s_gJORHvyP_ja5fVvOzQg_U-aNx5pQCO9c5jDbIGaPMhVZIO0h2AhnUQmJzleXrr2_-5BoYU4POoJMKc418ig-vq328J_5WH4z_XE_BeDSk_31T5H3Pf6WFdxhkdh4pPO4rhbqc-QSZxujaDvG_GhuH3ltNpPT0-HZ-zUup31mh_AX88vmGkTxAGtStT4HpwqimLGZ0Z2aUlwpiwltiynnGfX1L0u4X2-3yzal8JqG3FwZ4">
+</div>
+<div class="overflow-hidden">
+<p class="font-label-sm text-label-sm text-on-surface truncate">Admin Gebruiker</p>
+<p class="font-label-sm text-label-sm text-secondary truncate text-[10px]">Beheerder</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar (Shared Component) -->
+<header class="hidden md:flex justify-between items-center h-16 px-lg ml-64 fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-outline-variant bg-surface-container-lowest">
+<div class="flex items-center gap-md">
+<h2 class="font-headline-sm text-headline-sm font-bold text-primary">Momentum Drive</h2>
+</div>
+<div class="flex items-center gap-lg">
+<nav class="flex items-center gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all duration-100 hover:scale-95" href="#">Snelkoppelingen</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all duration-100 hover:scale-95" href="#">Handleiding</a>
+</nav>
+<div class="flex items-center gap-sm border-l border-outline-variant pl-md">
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-100 hover:scale-95">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container hover:text-primary transition-all duration-100 hover:scale-95">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="ml-sm px-sm py-xs border 2px border-[#1A1A1A] text-[#1A1A1A] rounded-DEFAULT font-label-md text-label-md hover:bg-surface-container transition-colors">
+                    Uitloggen
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Canvas -->
+<main class="md:ml-64 pt-24 px-md md:px-xl pb-xl max-w-container-max mx-auto">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-lg gap-md">
+<div>
+<h2 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-surface mb-xs">Instructeurs Beheren</h2>
+<p class="font-body-lg text-body-lg text-secondary">Overzicht van alle actieve rijinstructeurs en hun huidige belasting.</p>
+</div>
+<button class="flex items-center gap-sm bg-primary-container text-on-primary-container px-md py-sm rounded-DEFAULT font-label-md text-label-md hover:shadow-[0px_10px_30px_rgba(0,0,0,0.05)] transition-all self-start md:self-auto">
+<span class="material-symbols-outlined">person_add</span>
+                Nieuwe Instructeur
+            </button>
+</div>
+<!-- Utility Bar (Search/Filter) -->
+<div class="bg-surface-container-lowest p-sm rounded-xl border border-outline-variant mb-md flex flex-col sm:flex-row gap-sm items-center justify-between shadow-sm">
+<div class="relative w-full sm:w-64">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-secondary text-[20px]">search</span>
+<input class="w-full pl-xl pr-sm py-sm rounded-lg border border-outline-variant focus:border-primary focus:ring-1 focus:ring-primary bg-surface font-body-md text-body-md outline-none transition-all" placeholder="Zoek instructeur..." type="text">
+</div>
+<div class="flex gap-sm w-full sm:w-auto">
+<button class="flex items-center gap-xs px-sm py-xs border border-outline-variant rounded-lg text-secondary hover:bg-surface-container transition-colors font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]">filter_list</span>
+                    Filter
+                </button>
+<button class="flex items-center gap-xs px-sm py-xs border border-outline-variant rounded-lg text-secondary hover:bg-surface-container transition-colors font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[18px]">sort</span>
+                    Sorteer
+                </button>
+</div>
+</div>
+<!-- Instructor Grid (Bento/Card Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-md hover:shadow-[0px_10px_30px_rgba(0,0,0,0.05)] transition-all group flex flex-col h-full">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-surface-container-high" data-alt="A close-up portrait of a male driving instructor in his 40s with a neat beard, wearing a corporate polo shirt. He is outdoors on a bright, sunny day with a blurred modern car in the background. The lighting is crisp and clear, embodying a professional, approachable light-mode aesthetic.">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD1dvZ0aK-COK7fCds6DNBuI2Cd9PJ7EAbf4qc3zzDVX4nOn-h6fNx1o3XRzGUpb2zS3YdX2hR-vcVuL7-R8bYUi1UtCwNevYObfadyGP-rK5aFtAb1-9x7SyfZIH7_Z4-490Grf9i5YjITyzcvn07qzFGCd9kWKuI5xR_ICtf9URpkOQ-NsX2iwVPXTScNn6-V4bOG9osnPOJuFm1mjWwqNf_sBmWjhwB19JroRItGSfcfUC0R6JLNc8OrJ02zDFHAr3mMTA5j21E">
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface text-[18px]">Johan de Vries</h3>
+<span class="inline-block px-xs py-[2px] bg-surface-container-highest text-secondary rounded font-label-sm text-label-sm text-[10px] mt-1">Senior Instructeur</span>
+</div>
+</div>
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-sm mb-md flex-grow">
+<div class="flex items-center gap-sm text-secondary font-body-md text-body-md text-[14px]">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                        j.devries@momentum.nl
+                    </div>
+<div class="flex items-center gap-sm text-secondary font-body-md text-body-md text-[14px]">
+<span class="material-symbols-outlined text-[18px]">call</span>
+                        +31 6 1234 5678
+                    </div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm space-y-sm">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Actieve Leerlingen</span>
+<span class="font-headline-sm text-headline-sm text-primary">24</span>
+</div>
+<div>
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Weekplanning</span>
+<span class="font-label-sm text-label-sm text-secondary">38/40 uur</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-container w-[95%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-md hover:shadow-[0px_10px_30px_rgba(0,0,0,0.05)] transition-all group flex flex-col h-full">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-surface-container-high" data-alt="A portrait of a young female driving instructor smiling confidently. She is sitting inside a modern vehicle, with natural daylight illuminating her face. The scene is bright, utilizing a high-key lighting style to match a minimalist, trust-building corporate aesthetic.">
+<img alt="Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzZnRqgqnLgtNbi5qY7RzmAGSmipb9iFPQbt1Pc9oi2Y_6N0tjtxzOjuzAkugWDl9j7zLnbdSCLFAoBJrGNAsPIQbBbhlUBsHarKlsubzd8KW0iPpejht74WqdjemN3yiCxoi5nmYoNwIxIv2tUyRXXPQBOrWA5IY0ahbMu1beWAQlpAKt3pwoVdnvN4XoERU0FvJypggh8CiAK5bdtnhFraLTx06wIulezJGMAZhSdfd-ONMJGuX8GYozB6rQZDAys0q6WLfPBdc">
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface text-[18px]">Sanne Visser</h3>
+<span class="inline-block px-xs py-[2px] bg-surface-container-highest text-secondary rounded font-label-sm text-label-sm text-[10px] mt-1">RIS Specialist</span>
+</div>
+</div>
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-sm mb-md flex-grow">
+<div class="flex items-center gap-sm text-secondary font-body-md text-body-md text-[14px]">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                        s.visser@momentum.nl
+                    </div>
+<div class="flex items-center gap-sm text-secondary font-body-md text-body-md text-[14px]">
+<span class="material-symbols-outlined text-[18px]">call</span>
+                        +31 6 8765 4321
+                    </div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm space-y-sm">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Actieve Leerlingen</span>
+<span class="font-headline-sm text-headline-sm text-primary">18</span>
+</div>
+<div>
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Weekplanning</span>
+<span class="font-label-sm text-label-sm text-secondary">28/36 uur</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed-dim w-[75%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant p-md hover:shadow-[0px_10px_30px_rgba(0,0,0,0.05)] transition-all group flex flex-col h-full">
+<div class="flex justify-between items-start mb-md">
+<div class="flex items-center gap-sm">
+<div class="w-12 h-12 rounded-full overflow-hidden border-2 border-surface-container-high flex items-center justify-center bg-surface-container-high text-secondary">
+<span class="material-symbols-outlined text-[24px]">person</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface text-[18px]">Mark Peeters</h3>
+<span class="inline-block px-xs py-[2px] bg-primary-container text-on-primary-container rounded font-label-sm text-label-sm text-[10px] mt-1 font-medium">Nieuw</span>
+</div>
+</div>
+<button class="text-secondary hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+<div class="space-y-sm mb-md flex-grow">
+<div class="flex items-center gap-sm text-secondary font-body-md text-body-md text-[14px]">
+<span class="material-symbols-outlined text-[18px]">mail</span>
+                        m.peeters@momentum.nl
+                    </div>
+<div class="flex items-center gap-sm text-secondary font-body-md text-body-md text-[14px]">
+<span class="material-symbols-outlined text-[18px]">call</span>
+                        +31 6 1122 3344
+                    </div>
+</div>
+<div class="bg-surface-container-low rounded-lg p-sm space-y-sm">
+<div class="flex justify-between items-end">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Actieve Leerlingen</span>
+<span class="font-headline-sm text-headline-sm text-primary">5</span>
+</div>
+<div>
+<div class="flex justify-between items-center mb-xs">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Weekplanning</span>
+<span class="font-label-sm text-label-sm text-secondary">10/40 uur</span>
+</div>
+<div class="w-full h-2 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-inverse-primary w-[25%] rounded-full"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+
+
+</body></html>

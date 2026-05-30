@@ -1,0 +1,369 @@
+<!DOCTYPE html><html class="light" lang="nl"><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Instellingen - Momentum Drive</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-container": "#00391a",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-secondary-container": "#636262",
+                        "on-tertiary-container": "#2d3130",
+                        "inverse-surface": "#263334",
+                        "outline-variant": "#bccabc",
+                        "secondary": "#5f5e5e",
+                        "primary-container": "#27ae60",
+                        "primary": "#006d37",
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "on-surface": "#121e1f",
+                        "surface-container-low": "#e9f6f7",
+                        "outline": "#6d7a6e",
+                        "secondary-container": "#e2dfde",
+                        "surface-container-highest": "#d8e5e6",
+                        "primary-fixed": "#7efba4",
+                        "on-tertiary": "#ffffff",
+                        "inverse-primary": "#61de8a",
+                        "surface-variant": "#d8e5e6",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "on-background": "#121e1f",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#61de8a",
+                        "inverse-on-surface": "#e6f3f4",
+                        "surface-bright": "#eefcfd",
+                        "tertiary-container": "#959998",
+                        "surface-container": "#e3f0f1",
+                        "error": "#ba1a1a",
+                        "tertiary": "#5b5f5e",
+                        "on-tertiary-fixed": "#181c1b",
+                        "tertiary-fixed": "#e0e3e1",
+                        "surface-dim": "#cfdddd",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#00210c",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-tint": "#006d37",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "on-primary-fixed-variant": "#005228",
+                        "surface-container-high": "#ddebec",
+                        "background": "#eefcfd",
+                        "on-secondary": "#ffffff",
+                        "surface": "#eefcfd",
+                        "on-surface-variant": "#3d4a3f",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1200px",
+                        "base": "8px",
+                        "xs": "4px",
+                        "xl": "80px",
+                        "sm": "12px",
+                        "md": "24px",
+                        "lg": "48px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-md-mobile": ["Montserrat"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.25", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md-mobile": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen font-body-md text-body-md bg-white" style="background-color: #ffffff;">
+<!-- SideNavBar -->
+<nav class="h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col h-full py-md px-sm z-50 bg-white">
+<div class="mb-lg px-xs">
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Momentum</h1>
+<p class="font-label-sm text-label-sm text-secondary mt-xs">Instructeur Portaal</p>
+</div>
+<ul class="flex-1 space-y-xs">
+<li class="">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-label-md text-label-md">Mijn Leerlingen</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">calendar_month</span>
+<span class="font-label-md text-label-md">Lesplanning</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-secondary hover:text-primary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">list_alt</span>
+<span class="font-label-md text-label-md">RIS Modules</span>
+</a>
+</li>
+<li class="">
+<a class="flex items-center gap-sm px-sm py-sm rounded-lg text-primary font-bold border-r-4 border-primary bg-surface-container-low opacity-80 duration-150" href="#">
+<span class="material-symbols-outlined fill">settings</span>
+<span class="font-label-md text-label-md">Instellingen</span>
+</a>
+</li>
+</ul>
+<div class="mt-auto">
+<button class="w-full bg-primary-container text-on-primary font-label-md text-label-md py-sm rounded-lg hover:bg-primary transition-colors">
+                Nieuwe Les Inplannen
+            </button>
+<div class="flex items-center gap-sm mt-md px-xs">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden border border-outline-variant">
+<img alt="Instructeur Profielfoto" class="w-full h-full object-cover" data-alt="Professional headshot of a driving instructor in a clean, modern studio setting. The lighting is bright and even, casting soft shadows. The instructor is smiling confidently, wearing a dark branded polo shirt. The background is a plain light gray." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCrHGiQ661lJIRUsFUjmbf-i9gBI7T3e7sTBbeB8c_dUQnGqrJm65Fnt5tYmHOlNmF1RHMDJDGcYHAEThoyyjIc6iF8I39yG23A1rtOLId3xkpPd-08HlVR0IE1MNR4di87SS5cpIr0psrlchmf8MhsBX3EikaZf3Yi_aqfp4C7IRP1Qa8q_Mw_91C2G94BjdFOnx6va2AKHoOK4fj9Z6_9dNZhfxVDmBw8jMyut4m-fYkBh9AI7vYlWGhx29DDTB9XnjL9nU_sDOk">
+</div>
+<div>
+<p class="font-label-md text-label-md text-on-surface">Rijschool Momentum</p>
+<p class="font-label-sm text-label-sm text-secondary">Admin</p>
+</div>
+</div>
+</div>
+</nav>
+<!-- TopAppBar -->
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-outline-variant flex justify-between items-center h-16 px-lg bg-white">
+<div class="font-headline-sm text-headline-sm font-bold text-primary">
+            Momentum Drive
+        </div>
+<div class="flex items-center gap-md">
+<nav class="hidden md:flex items-center gap-md">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Snelkoppelingen</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all" href="#">Handleiding</a>
+</nav>
+<div class="flex items-center gap-sm border-l border-outline-variant pl-md ml-sm">
+<button class="text-on-surface-variant hover:text-primary transition-all active:scale-95 duration-100 p-xs rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="text-on-surface-variant hover:text-primary transition-all active:scale-95 duration-100 p-xs rounded-full hover:bg-surface-container-low">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+<button class="font-label-md text-label-md text-primary ml-sm hover:text-primary-container transition-colors">
+                    Uitloggen
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-64 pt-24 px-lg pb-xl max-w-container-max mx-auto">
+<div class="mb-lg">
+<h2 class="font-display-lg text-display-lg text-on-surface mb-xs">Systeem Instellingen</h2>
+<p class="font-body-lg text-body-lg text-secondary">Beheer globale configuraties, prijzen en beveiliging voor Rijschool Momentum.</p>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-gutter">
+<!-- Column 1: Core Settings -->
+<div class="lg:col-span-2 space-y-md">
+<!-- Business Details -->
+<section class="rounded-xl border border-outline-variant p-md bg-surface-container-lowest shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">storefront</span>
+                        Bedrijfsgegevens
+                    </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-md">
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">WhatsApp Nummer (Contact)</label>
+<input class="w-full rounded-lg border border-outline-variant px-sm py-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all font-body-md text-body-md bg-surface-container-lowest" type="tel" value="+31 6 12345678">
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Standaard Lesprijs per uur (€)</label>
+<input class="w-full rounded-lg border border-outline-variant px-sm py-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all font-body-md text-body-md bg-surface-container-lowest" type="number" value="70">
+</div>
+</div>
+</section>
+<!-- Package Management Bento -->
+<section class="rounded-xl border border-outline-variant p-md bg-surface-container-lowest shadow-sm">
+<div class="flex justify-between items-center mb-md">
+<h3 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">view_cozy</span>
+                            Lespakketten Beheer
+                        </h3>
+<button class="font-label-sm text-label-sm text-primary hover:text-primary-container transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">add</span> Nieuw Pakket
+                        </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-sm">
+<!-- Brons -->
+<div class="border border-outline-variant rounded-lg p-sm hover:shadow-[0px_10px_30px_rgba(0,0,0,0.05)] transition-shadow bg-surface-container-lowest">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-label-md text-label-md text-on-surface">Brons</h4>
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">edit</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary mb-xs">€1.495</p>
+<ul class="space-y-xs font-label-sm text-label-sm text-secondary">
+<li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary-container text-[16px]">check_circle</span> 20 Rijlessen</li>
+<li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary-container text-[16px]">check_circle</span> Praktijkexamen</li>
+</ul>
+</div>
+<!-- Goud -->
+<div class="border border-primary rounded-lg p-sm relative hover:shadow-[0px_10px_30px_rgba(0,0,0,0.05)] transition-shadow bg-surface-container-lowest">
+<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-on-primary font-label-sm text-label-sm px-2 py-0.5 rounded-full whitespace-nowrap">Aanbevolen</span>
+<div class="flex justify-between items-start mb-sm mt-xs">
+<h4 class="font-label-md text-label-md text-on-surface">Goud</h4>
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">edit</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary mb-xs">€2.195</p>
+<ul class="space-y-xs font-label-sm text-label-sm text-secondary">
+<li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary-container text-[16px]">check_circle</span> 30 Rijlessen</li>
+<li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary-container text-[16px]">check_circle</span> Tussentijdse Toets</li>
+</ul>
+</div>
+<!-- Diamant -->
+<div class="border border-outline-variant rounded-lg p-sm bg-surface-container-low hover:shadow-[0px_10px_30px_rgba(0,0,0,0.05)] transition-shadow">
+<div class="flex justify-between items-start mb-sm">
+<h4 class="font-label-md text-label-md text-on-surface">Diamant</h4>
+<span class="material-symbols-outlined text-secondary cursor-pointer hover:text-primary">edit</span>
+</div>
+<p class="font-headline-sm text-headline-sm text-primary mb-xs">€2.895</p>
+<ul class="space-y-xs font-label-sm text-label-sm text-secondary">
+<li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary-container text-[16px]">check_circle</span> 40 Rijlessen</li>
+<li class="flex items-center gap-xs"><span class="material-symbols-outlined text-primary-container text-[16px]">check_circle</span> RIS Methodiek</li>
+</ul>
+</div>
+</div>
+</section>
+<div class="flex justify-end gap-sm mt-md">
+<button class="px-md py-sm border-2 border-[#1A1A1A] text-[#1A1A1A] font-label-md text-label-md rounded-lg hover:bg-surface-container-low transition-colors">
+                        Annuleren
+                    </button>
+<button class="px-md py-sm bg-primary-container text-on-primary font-label-md text-label-md rounded-lg hover:bg-primary transition-colors shadow-sm">
+                        Wijzigingen Opslaan
+                    </button>
+</div>
+</div>
+<!-- Column 2: Security & Brand -->
+<div class="space-y-md">
+<!-- Security Settings -->
+<section class="rounded-xl border border-outline-variant p-md bg-surface-container-lowest shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">security</span>
+                        Beveiliging
+                    </h3>
+<div class="flex items-center justify-between p-sm bg-surface-container-lowest border border-outline-variant rounded-lg mb-sm">
+<div>
+<p class="font-label-md text-label-md text-on-surface">2FA Verplichten</p>
+<p class="font-label-sm text-label-sm text-secondary">Voor alle instructeurs</p>
+</div>
+<!-- Toggle Switch styling -->
+<label class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox" value="">
+<div class="w-11 h-6 bg-secondary-container peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</label>
+</div>
+<div class="flex items-center justify-between p-sm bg-surface-container-lowest border border-outline-variant rounded-lg">
+<div>
+<p class="font-label-md text-label-md text-on-surface">Sessie Timeout</p>
+<p class="font-label-sm text-label-sm text-secondary">Automatisch uitloggen na</p>
+</div>
+<select class="rounded-lg border border-outline-variant px-sm py-xs text-sm focus:border-primary-container outline-none bg-surface-container-lowest font-label-sm">
+<option>30 min</option>
+<option selected="">1 uur</option>
+<option>4 uur</option>
+</select>
+</div>
+</section>
+<!-- Branding -->
+<section class="rounded-xl border border-outline-variant p-md bg-surface-container-lowest shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">palette</span>
+                        Huisstijl
+                    </h3>
+<div class="mb-sm">
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Logo (SVG/PNG)</label>
+<div class="border-2 border-dashed border-outline-variant rounded-lg p-md text-center hover:bg-surface-container-low transition-colors cursor-pointer bg-surface-container-lowest">
+<span class="material-symbols-outlined text-secondary text-[32px] mb-xs">cloud_upload</span>
+<p class="font-label-sm text-label-sm text-secondary">Klik om bestand te uploaden</p>
+</div>
+</div>
+<div>
+<label class="block font-label-sm text-label-sm text-on-surface-variant mb-xs">Primaire Kleur (HEX)</label>
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded border border-outline-variant bg-primary-container"></div>
+<input class="flex-1 rounded-lg border border-outline-variant px-sm py-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all font-body-md text-body-md bg-surface-container-lowest" type="text" value="#27AE60">
+</div>
+</div>
+</section>
+<!-- Audit Log Preview (Glassmorphism inspired) -->
+<section class="bg-surface-container rounded-xl border border-outline-variant p-md relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-surface/50 to-surface-variant/30 backdrop-blur-sm z-0"></div>
+<div class="relative z-10">
+<h3 class="font-headline-sm text-headline-sm text-on-surface mb-sm flex items-center gap-xs">
+<span class="material-symbols-outlined text-primary">history</span>
+                            Audit Log (Recent)
+                        </h3>
+<ul class="space-y-sm">
+<li class="flex items-start gap-sm border-b border-outline-variant/50 pb-sm">
+<div class="w-8 h-8 rounded-full bg-primary-container/20 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary text-[16px]">edit_document</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">Lesprijs gewijzigd naar €70</p>
+<p class="font-label-sm text-label-sm text-secondary text-[10px]">Door: J. de Vries • Vandaag, 14:32</p>
+</div>
+</li>
+<li class="flex items-start gap-sm border-b border-outline-variant/50 pb-sm">
+<div class="w-8 h-8 rounded-full bg-secondary-container/50 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-secondary text-[16px]">security</span>
+</div>
+<div>
+<p class="font-label-sm text-label-sm text-on-surface">2FA instellingen geüpdatet</p>
+<p class="font-label-sm text-label-sm text-secondary text-[10px]">Door: Systeem • Gisteren, 09:15</p>
+</div>
+</li>
+</ul>
+<button class="w-full mt-sm font-label-sm text-label-sm text-primary text-center hover:underline">Bekijk volledige logboek</button>
+</div>
+</section>
+</div>
+</div>
+</main>
+
+
+</body></html>

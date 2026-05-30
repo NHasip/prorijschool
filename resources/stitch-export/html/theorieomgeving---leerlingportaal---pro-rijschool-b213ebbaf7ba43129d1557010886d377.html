@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html lang="nl"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Theorie | Pro Rijschool</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Montserrat:wght@600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "outline-variant": "#bccabc",
+                        "error": "#ba1a1a",
+                        "primary-fixed": "#7efba4",
+                        "tertiary-fixed-dim": "#c4c7c5",
+                        "secondary-fixed": "#e5e2e1",
+                        "on-background": "#121e1f",
+                        "on-secondary": "#ffffff",
+                        "inverse-primary": "#61de8a",
+                        "surface": "#eefcfd",
+                        "on-surface-variant": "#3d4a3f",
+                        "primary": "#006d37",
+                        "on-primary-container": "#00391a",
+                        "primary-fixed-dim": "#61de8a",
+                        "secondary-fixed-dim": "#c8c6c5",
+                        "primary-container": "#27ae60",
+                        "on-primary": "#ffffff",
+                        "surface-container-low": "#e9f6f7",
+                        "surface-container-high": "#ddebec",
+                        "surface-container": "#e3f0f1",
+                        "on-secondary-fixed-variant": "#474746",
+                        "on-primary-fixed": "#00210c",
+                        "surface-variant": "#d8e5e6",
+                        "on-surface": "#121e1f",
+                        "tertiary-fixed": "#e0e3e1",
+                        "on-tertiary-fixed": "#181c1b",
+                        "secondary-container": "#e2dfde",
+                        "on-primary-fixed-variant": "#005228",
+                        "on-tertiary-container": "#2d3130",
+                        "on-error-container": "#93000a",
+                        "surface-tint": "#006d37",
+                        "tertiary-container": "#959998",
+                        "on-error": "#ffffff",
+                        "outline": "#6d7a6e",
+                        "surface-container-highest": "#d8e5e6",
+                        "on-secondary-fixed": "#1c1b1b",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#636262",
+                        "inverse-on-surface": "#e6f3f4",
+                        "tertiary": "#5b5f5e",
+                        "surface-dim": "#cfdddd",
+                        "inverse-surface": "#263334",
+                        "on-tertiary-fixed-variant": "#434846",
+                        "surface-bright": "#eefcfd",
+                        "error-container": "#ffdad6",
+                        "background": "#eefcfd",
+                        "secondary": "#5f5e5e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "24px",
+                        "container-max": "1200px",
+                        "sm": "12px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Montserrat"],
+                        "headline-md-mobile": ["Montserrat"],
+                        "display-lg-mobile": ["Montserrat"],
+                        "headline-sm": ["Montserrat"],
+                        "headline-md": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-md-mobile": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "display-lg-mobile": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-sm": ["24px", { "lineHeight": "1.4", "fontWeight": "600" }],
+                        "headline-md": ["32px", { "lineHeight": "1.25", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "1.4", "letterSpacing": "0.05em", "fontWeight": "600" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1;
+        }
+        /* Soft shadows as per guidance */
+        .shadow-soft {
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen flex flex-col antialiased">
+<!-- TopNavBar -->
+<header class="bg-surface dark:bg-inverse-surface docked full-width top-0 sticky border-b border-outline-variant dark:border-outline z-50">
+<div class="flex justify-between items-center w-full px-lg md:px-xl py-4 max-w-container-max mx-auto">
+<!-- Brand -->
+<div class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">
+                Pro Rijschool
+            </div>
+<!-- Desktop Navigation -->
+<nav class="hidden md:flex space-x-md items-center">
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 duration-200" href="#">Home</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 duration-200" href="#">Rijlessen</a>
+<a class="text-primary dark:text-primary-fixed font-bold border-b-2 border-primary pb-1 font-label-md text-label-md opacity-80 duration-200" href="#">Theorie</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 duration-200" href="#">Pakketten</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 duration-200" href="#">Over ons</a>
+<a class="text-secondary dark:text-secondary-fixed-dim font-label-md text-label-md hover:text-primary dark:hover:text-primary-fixed transition-colors opacity-80 duration-200" href="#">Contact</a>
+</nav>
+<!-- Trailing Action -->
+<div class="hidden md:block">
+<button class="bg-primary-container text-on-primary font-label-md text-label-md px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                    Inloggen Portaal
+                </button>
+</div>
+</div>
+</header>
+<!-- Main Content Layout -->
+<div class="flex-grow flex w-full max-w-container-max mx-auto md:px-xl py-lg md:py-xl">
+<!-- Canvas -->
+<main class="w-full">
+<!-- Header Section -->
+<div class="mb-lg px-4 md:px-0">
+<h1 class="font-display-lg-mobile md:font-display-lg text-display-lg-mobile md:text-display-lg text-on-background mb-sm">Mijn Theorie</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-3xl">Bereid je voor op je theorie-examen met onze uitgebreide videolessen, teksten en oefenmaterialen. Kies je categorie om te starten.</p>
+</div>
+<!-- Categories Grid (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md mb-xl px-4 md:px-0">
+<!-- Auto Category - Active -->
+<div class="bg-surface-container-low border-2 border-primary rounded-xl p-md cursor-pointer transition-transform hover:-translate-y-1 shadow-soft relative overflow-hidden group">
+<div class="absolute top-0 right-0 bg-primary text-on-primary font-label-sm text-label-sm px-3 py-1 rounded-bl-lg z-10">Actief</div>
+<div class="w-12 h-12 rounded-full bg-primary-container/20 flex items-center justify-center mb-md text-primary group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-background mb-xs">Auto (B)</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mb-md">60% afgerond</p>
+<!-- Progress bar -->
+<div class="w-full bg-surface-variant rounded-full h-2 mb-sm">
+<div class="bg-primary h-2 rounded-full" style="width: 60%"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant">
+<span>12/20 modules</span>
+<span>Ga verder <span class="material-symbols-outlined text-[14px] align-middle" data-icon="arrow_forward">arrow_forward</span></span>
+</div>
+</div>
+<!-- Bromfiets Category -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md cursor-pointer transition-transform hover:-translate-y-1 hover:shadow-soft group">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center mb-md text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="moped">moped</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-background mb-xs">Bromfiets (AM)</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mb-md">Niet gestart</p>
+<!-- Progress bar -->
+<div class="w-full bg-surface-variant rounded-full h-2 mb-sm">
+<div class="bg-primary h-2 rounded-full" style="width: 0%"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant opacity-70">
+<span>0/15 modules</span>
+<span>Starten</span>
+</div>
+</div>
+<!-- Motor Category -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md cursor-pointer transition-transform hover:-translate-y-1 hover:shadow-soft group">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center mb-md text-on-surface-variant group-hover:text-primary transition-colors">
+<span class="material-symbols-outlined" data-icon="motorcycle">motorcycle</span>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-background mb-xs">Motor (A)</h2>
+<p class="font-label-md text-label-md text-on-surface-variant mb-md">Niet gestart</p>
+<!-- Progress bar -->
+<div class="w-full bg-surface-variant rounded-full h-2 mb-sm">
+<div class="bg-primary h-2 rounded-full" style="width: 0%"></div>
+</div>
+<div class="flex justify-between font-label-sm text-label-sm text-on-surface-variant opacity-70">
+<span>0/18 modules</span>
+<span>Starten</span>
+</div>
+</div>
+</div>
+<!-- Active Category Content: Auto -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant overflow-hidden mb-xl mx-4 md:mx-0">
+<div class="border-b border-outline-variant bg-surface p-md md:p-lg flex flex-col md:flex-row md:items-center justify-between gap-md">
+<div>
+<h3 class="font-headline-md text-headline-md text-on-background mb-xs">Hoofdstuk 3: Verkeersborden en Aanwijzingen</h3>
+<p class="font-body-md text-body-md text-on-surface-variant">Leer alles over de verschillende soorten verkeersborden, wegmarkeringen en aanwijzingen van bevoegde personen.</p>
+</div>
+<div class="flex-shrink-0">
+<button class="w-full md:w-auto bg-primary-container text-on-primary font-label-md text-label-md px-6 py-3 rounded-lg hover:opacity-90 transition-opacity flex items-center justify-center gap-2">
+<span class="material-symbols-outlined fill" data-icon="play_circle">play_circle</span>
+                            Hervat Video
+                        </button>
+</div>
+</div>
+<!-- Lesson List -->
+<div class="divide-y divide-outline-variant">
+<!-- Lesson Item 1 - Completed Video -->
+<div class="p-md md:px-lg flex items-start gap-4 hover:bg-surface-container-low transition-colors cursor-pointer opacity-70">
+<div class="w-8 h-8 rounded-full bg-primary flex-shrink-0 flex items-center justify-center text-on-primary mt-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">Video</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">08:45</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-background mb-1">3.1 Snelheidsborden en Zoneringsborden</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Uitleg over de maximale en minimale snelheden en het herkennen van zones.</p>
+</div>
+</div>
+<!-- Lesson Item 2 - Active Text -->
+<div class="p-md md:px-lg flex items-start gap-4 bg-surface-container-low border-l-4 border-primary">
+<div class="w-8 h-8 rounded-full border-2 border-primary flex-shrink-0 flex items-center justify-center text-primary mt-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="article">article</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-primary/10 text-primary font-label-sm text-label-sm px-2 py-0.5 rounded">Theorie Tekst</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">5 min lezen</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-background mb-1">3.2 Overzicht van alle Gevaarsborden</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Een compleet overzicht van gevaarsborden en hoe je hierop moet anticiperen.</p>
+</div>
+</div>
+<!-- Lesson Item 3 - Locked PDF -->
+<div class="p-md md:px-lg flex items-start gap-4 hover:bg-surface-container-low transition-colors cursor-pointer">
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex-shrink-0 flex items-center justify-center text-outline mt-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="picture_as_pdf">picture_as_pdf</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">Download</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">2.4 MB</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-background mb-1">3.3 Spiekbriefje: Voorrangsborden</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Handige samenvatting om uit te printen en mee te nemen.</p>
+</div>
+</div>
+<!-- Lesson Item 4 - Locked Quiz -->
+<div class="p-md md:px-lg flex items-start gap-4 hover:bg-surface-container-low transition-colors cursor-pointer opacity-50">
+<div class="w-8 h-8 rounded-full border-2 border-outline-variant flex-shrink-0 flex items-center justify-center text-outline mt-1">
+<span class="material-symbols-outlined text-[18px]" data-icon="lock">lock</span>
+</div>
+<div class="flex-grow">
+<div class="flex items-center gap-2 mb-1">
+<span class="bg-surface-variant text-on-surface-variant font-label-sm text-label-sm px-2 py-0.5 rounded">Oefentoets</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant">15 vragen</span>
+</div>
+<h4 class="font-label-md text-label-md text-on-background mb-1">Hoofdstuk 3: Oefentoets Verkeersborden</h4>
+<p class="font-body-md text-body-md text-on-surface-variant text-sm">Test je kennis over dit hoofdstuk voordat je doorgaat naar het volgende.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Footer -->
+<footer class="bg-on-tertiary-fixed dark:bg-on-tertiary-fixed full-width mt-auto">
+<div class="grid grid-cols-1 md:grid-cols-4 gap-md px-lg md:px-xl py-xl max-w-container-max mx-auto">
+<!-- Brand & Copyright -->
+<div class="col-span-1 md:col-span-2">
+<div class="font-headline-sm text-headline-sm font-bold text-on-tertiary mb-sm">
+                    Pro Rijschool
+                </div>
+<p class="font-body-md text-body-md text-tertiary-fixed-dim">
+                    © 2024 Pro Rijschool Haarlemmermeer. Kwaliteit in elke kilometer.
+                </p>
+</div>
+<!-- Links -->
+<div class="col-span-1 md:col-span-2 flex flex-col md:flex-row gap-4 md:justify-end">
+<a class="text-tertiary-fixed-dim font-label-sm text-label-sm hover:text-primary-fixed transition-colors active:scale-95 duration-150" href="#">Algemene Voorwaarden</a>
+<a class="text-tertiary-fixed-dim font-label-sm text-label-sm hover:text-primary-fixed transition-colors active:scale-95 duration-150" href="#">Privacy Policy</a>
+<a class="text-tertiary-fixed-dim font-label-sm text-label-sm hover:text-primary-fixed transition-colors active:scale-95 duration-150" href="#">Cookiebeleid</a>
+<a class="text-tertiary-fixed-dim font-label-sm text-label-sm hover:text-primary-fixed transition-colors active:scale-95 duration-150" href="#">Klantenservice</a>
+</div>
+</div>
+</footer>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="bg-surface dark:bg-surface-container-highest docked full-width bottom-0 z-50 md:hidden shadow-lg border-t border-outline-variant fixed left-0 w-full flex justify-around items-center px-4 py-2">
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant rounded-lg p-2 transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="calendar_today">calendar_today</span>
+<span class="font-label-sm text-label-sm-mobile text-primary dark:text-primary-container">Proefles Boeken</span>
+</button>
+<button class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant rounded-lg p-2 transition-colors">
+<span class="material-symbols-outlined mb-1" data-icon="chat">chat</span>
+<span class="font-label-sm text-label-sm-mobile text-primary dark:text-primary-container">WhatsApp</span>
+</button>
+</nav>
+</body></html>
