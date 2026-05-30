@@ -4,10 +4,14 @@ Use this for `prorijschool.necmardemo.nl`.
 
 ## 1. Document root
 
-In Plesk set the domain document root to Laravel's `public` folder.
+You have 2 valid options in Plesk:
 
-Example:
-- If repo is in `httpdocs`: document root `httpdocs/public`
+1. Recommended: point document root to Laravel `public`.
+   Example: if repo is in `httpdocs`, use `httpdocs/public`.
+
+2. Alternative (shared-hosting fallback): point document root to project root
+   and use the root `.htaccess` in this repo to route requests to `public/`.
+   Example: `httpdocs`
 
 ## 2. Additional deployment actions
 
