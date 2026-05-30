@@ -43,6 +43,10 @@ echo "==> Using PHP binary: $PHP_BIN"
 "$PHP_BIN" -v | head -n 1
 echo "==> Using Composer command: ${COMPOSER_CMD[*]}"
 
+# Isolate composer from globally installed Plesk plugins.
+export COMPOSER_HOME="${ROOT_DIR}/.composer-home"
+mkdir -p "${COMPOSER_HOME}"
+
 if [[ ! -f .env && -f .env.example ]]; then
   echo "==> .env not found, copying from .env.example"
   cp .env.example .env
