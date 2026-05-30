@@ -49,7 +49,7 @@ if [[ ! -f .env && -f .env.example ]]; then
 fi
 
 echo "==> Installing PHP dependencies"
-"${COMPOSER_CMD[@]}" install --no-interaction --prefer-dist --no-dev --optimize-autoloader
+"${COMPOSER_CMD[@]}" install --no-plugins --no-interaction --prefer-dist --no-dev --optimize-autoloader
 
 if [[ ! -f .env ]]; then
   echo "ERROR: .env is missing."
