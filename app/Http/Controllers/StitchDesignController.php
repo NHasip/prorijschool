@@ -10,10 +10,14 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class StitchDesignController extends Controller
 {
     private string $manifestPath;
+    private string $htmlDir;
+    private string $screenshotDir;
 
     public function __construct()
     {
         $this->manifestPath = resource_path('stitch-export/manifest.json');
+        $this->htmlDir = resource_path('stitch-export/html');
+        $this->screenshotDir = resource_path('stitch-export/screenshots');
     }
 
     public function index(): View
@@ -64,7 +68,15 @@ class StitchDesignController extends Controller
             return [];
         }
 
-        return array_values(array_filter($screens, fn ($item) => is_array($item)));
+        $normalized = array_values(array_filter($screens, fn ($item) => is_array($item)));
+
+        foreach ($normalized as &$screen) {
+            $screen['html'] = $this->normalizePath($screen['html'] ?? null, $this->htmlDir);
+            $screen['screenshot'] = $this->normalizePath($screen['screenshot'] ?? null, $this->screenshotDir);
+        }
+        unset($screen);
+
+        return $normalized;
     }
 
     private function findScreen(string $screenId): array
@@ -76,5 +88,21 @@ class StitchDesignController extends Controller
         }
 
         throw new NotFoundHttpException("Screen {$screenId} was not found in Stitch export.");
+    }
+
+    private function normalizePath(?string $path, string $baseDir): ?string
+    {
+        if (! is_string($path) || trim($path) === '') {
+            return null;
+        }
+
+        if (is_file($path)) {
+            return $path;
+        }
+
+        $filename = basename(str_replace('\\', '/', $path));
+        $candidate = $baseDir.DIRECTORY_SEPARATOR.$filename;
+
+        return is_file($candidate) ? $candidate : null;
     }
 }
