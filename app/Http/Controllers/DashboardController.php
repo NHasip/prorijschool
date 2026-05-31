@@ -19,6 +19,6 @@ class DashboardController extends Controller
             default => '0413e936266e41c493dcc562d3032b00',
         };
 
-        return app(StitchDesignController::class)->show($screenId);
+        return app(StitchDesignController::class)->show($request, $screenId);
     }
 }
