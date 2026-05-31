@@ -205,59 +205,88 @@ class StitchDesignController extends Controller
     return url || '#';
   }
 
-  function normalizeInstructorChrome() {
-    if (role !== 'instructeur') return;
+  function normalizePortalChrome() {
+    if (!role) return;
 
     const nav = document.querySelector('nav');
     const header = document.querySelector('header');
     if (!nav || !header) return;
 
     const path = window.location.pathname;
-    const isActive = (segment) => path.includes(segment);
+    const isActive = (segment) => segment && path.includes(segment);
 
-    nav.className = 'h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col py-md px-sm z-50 bg-white';
+    const roleTitles = {
+      admin: 'Admin Portaal',
+      beheerder: 'Admin Portaal',
+      instructeur: 'Instructeur Portaal',
+      leerling: 'Leerling Portaal',
+    };
 
-    nav.innerHTML = `
-<div class="mb-lg px-sm">
-  <h1 class="font-headline-md text-headline-md font-bold text-primary">Momentum</h1>
-  <p class="font-label-sm text-label-sm text-secondary mt-xs">Instructeur Portaal</p>
-</div>
-<ul class="flex flex-col gap-xs flex-1">
-  <li>
-    <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive('/instructeur/dashboard') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_dashboard)}">
-      <span class="material-symbols-outlined text-[20px]">dashboard</span>
-      <span class="font-label-md text-label-md">Dashboard</span>
-    </a>
-  </li>
-  <li>
-    <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive('/instructeur/leerlingen') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_students)}">
-      <span class="material-symbols-outlined text-[20px]">group</span>
-      <span class="font-label-md text-label-md">Mijn Leerlingen</span>
-    </a>
-  </li>
-  <li>
-    <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive('/instructeur/lesplanning') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_planning)}">
-      <span class="material-symbols-outlined text-[20px]">calendar_month</span>
-      <span class="font-label-md text-label-md">Lesplanning</span>
-    </a>
-  </li>
-  <li>
-    <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive('/instructeur/ris-modules') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_ris)}">
-      <span class="material-symbols-outlined text-[20px]">list_alt</span>
-      <span class="font-label-md text-label-md">RIS Modules</span>
-    </a>
-  </li>
-</ul>
-<div class="mt-auto border-t border-outline-variant pt-md px-sm">
+    const menuByRole = {
+      admin: [
+        { label: 'Dashboard', icon: 'dashboard', href: routes.admin_dashboard, match: '/admin/dashboard' },
+        { label: 'Mijn Leerlingen', icon: 'group', href: routes.admin_students, match: '/admin/leerlingen' },
+        { label: 'Instructeurs', icon: 'school', href: routes.admin_instructors, match: '/admin/instructeurs' },
+        { label: 'Financien', icon: 'payments', href: routes.admin_finance, match: '/admin/financien' },
+      ],
+      beheerder: [
+        { label: 'Dashboard', icon: 'dashboard', href: routes.admin_dashboard, match: '/admin/dashboard' },
+        { label: 'Mijn Leerlingen', icon: 'group', href: routes.admin_students, match: '/admin/leerlingen' },
+        { label: 'Instructeurs', icon: 'school', href: routes.admin_instructors, match: '/admin/instructeurs' },
+        { label: 'Financien', icon: 'payments', href: routes.admin_finance, match: '/admin/financien' },
+      ],
+      instructeur: [
+        { label: 'Dashboard', icon: 'dashboard', href: routes.instructor_dashboard, match: '/instructeur/dashboard' },
+        { label: 'Mijn Leerlingen', icon: 'group', href: routes.instructor_students, match: '/instructeur/leerlingen' },
+        { label: 'Lesplanning', icon: 'calendar_month', href: routes.instructor_planning, match: '/instructeur/lesplanning' },
+        { label: 'RIS Modules', icon: 'list_alt', href: routes.instructor_ris, match: '/instructeur/ris-modules' },
+      ],
+      leerling: [
+        { label: 'Dashboard', icon: 'dashboard', href: routes.learner_dashboard, match: '/leerling/dashboard' },
+        { label: 'Planning', icon: 'calendar_month', href: routes.learner_planning, match: '/leerling/planning' },
+        { label: 'Voortgang', icon: 'trending_up', href: routes.learner_progress, match: '/leerling/voortgang' },
+        { label: 'Facturen', icon: 'receipt_long', href: routes.learner_invoices, match: '/leerling/facturen' },
+        { label: 'Theorie', icon: 'menu_book', href: routes.learner_theory, match: '/leerling/theorie' },
+      ],
+    };
+
+    const items = menuByRole[role];
+    if (!items || !items.length) return;
+
+    const settingsRoute = (role === 'admin' || role === 'beheerder')
+      ? routes.admin_settings
+      : (role === 'instructeur' ? routes.instructor_settings : null);
+    const showPlannerButton = role !== 'leerling';
+    const title = roleTitles[role] || 'Portaal';
+
+    const navItemsHtml = items.map((item) => `
+<li>
+  <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive(item.match) ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(item.href)}">
+    <span class="material-symbols-outlined text-[20px]">\${item.icon}</span>
+    <span class="font-label-md text-label-md">\${item.label}</span>
+  </a>
+</li>`).join('');
+
+    const settingsHtml = settingsRoute ? `
+  <a class="mt-sm flex items-center gap-sm py-sm rounded-lg \${isActive('/instellingen') ? 'text-primary font-bold' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(settingsRoute)}">
+    <span class="material-symbols-outlined text-[20px]">settings</span>
+    <span class="font-label-md text-label-md">Instellingen</span>
+  </a>` : '';
+
+    const plannerHtml = showPlannerButton ? `
   <button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-sm rounded-lg flex items-center justify-center gap-xs hover:opacity-90 transition-opacity">
     <span class="material-symbols-outlined text-[18px]">add</span>
     Nieuwe Les Inplannen
-  </button>
-  <a class="mt-sm flex items-center gap-sm py-sm rounded-lg \${isActive('/instructeur/instellingen') ? 'text-primary font-bold' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_settings)}">
-    <span class="material-symbols-outlined text-[20px]">settings</span>
-    <span class="font-label-md text-label-md">Instellingen</span>
-  </a>
-</div>`;
+  </button>` : '';
+
+    nav.className = 'h-screen w-64 fixed left-0 top-0 border-r border-outline-variant flex flex-col py-md px-sm z-50 bg-white';
+    nav.innerHTML = `
+<div class="mb-lg px-sm">
+  <h1 class="font-headline-md text-headline-md font-bold text-primary">Pro Rijschool</h1>
+  <p class="font-label-sm text-label-sm text-secondary mt-xs">\${title}</p>
+</div>
+<ul class="flex flex-col gap-xs flex-1">\${navItemsHtml}</ul>
+<div class="mt-auto border-t border-outline-variant pt-md px-sm">\${plannerHtml}\${settingsHtml}</div>`;
 
     header.className = 'fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-outline-variant flex justify-between items-center h-16 px-lg bg-white';
     header.innerHTML = `
@@ -279,7 +308,7 @@ class StitchDesignController extends Controller
   <div class="w-[1px] h-6 bg-outline-variant mx-xs"></div>
   <button class="font-label-md text-label-md text-secondary hover:text-primary transition-all">Uitloggen</button>
   <div class="w-8 h-8 rounded-full bg-secondary-container overflow-hidden border border-outline-variant">
-    <img alt="Instructeur Profielfoto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_PEO-hz0FdzAU7XPdf7U7SAEXE-BPQwN7Zx13R8cq0QZiSAOgN9g1x201LE_s-lx6yLW_HwMJLka2OS2gtD-JBtWHhQT_Ss7AMk6M8NqzsL_EWOzBUk5NVJaHEg3qut0TbEMpO-ObML9l6ZCfFy6WXwIYmougUaQEY3-00v11q_ypOhxDxIZFZBy5EKwf9MesXbxH8iOcNt70Nlk5PSh6FA56HJmnScwJkFdosu-csBweONBDOCvMdoMHwY8QZ-CKwZ5OZbazYU4">
+    <img alt="Profielfoto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_PEO-hz0FdzAU7XPdf7U7SAEXE-BPQwN7Zx13R8cq0QZiSAOgN9g1x201LE_s-lx6yLW_HwMJLka2OS2gtD-JBtWHhQT_Ss7AMk6M8NqzsL_EWOzBUk5NVJaHEg3qut0TbEMpO-ObML9l6ZCfFy6WXwIYmougUaQEY3-00v11q_ypOhxDxIZFZBy5EKwf9MesXbxH8iOcNt70Nlk5PSh6FA56HJmnScwJkFdosu-csBweONBDOCvMdoMHwY8QZ-CKwZ5OZbazYU4">
   </div>
 </div>`;
   }
@@ -322,7 +351,7 @@ class StitchDesignController extends Controller
     return null;
   }
 
-  normalizeInstructorChrome();
+  normalizePortalChrome();
 
   document.addEventListener('click', function (event) {
     const target = event.target.closest('a, button');
