@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <h1>Registreren</h1>
-        <p class="muted">Leerlingen worden eerst ter goedkeuring aangeboden aan de rijschool.</p>
+        <p class="muted">Nieuwe accounts worden als leerling aangemaakt en eerst ter goedkeuring aangeboden.</p>
 
         <form method="post" action="{{ route('register.store') }}">
             @csrf
@@ -12,13 +12,6 @@
 
             <label for="email">E-mail</label>
             <input id="email" type="email" name="email" value="{{ old('email') }}" required>
-
-            <label for="role">Rol</label>
-            <select id="role" name="role" required>
-                <option value="leerling" @selected(old('role', 'leerling') === 'leerling')>Leerling</option>
-                <option value="instructeur" @selected(old('role') === 'instructeur')>Instructeur</option>
-                <option value="beheerder" @selected(old('role') === 'beheerder')>Rijschoolbeheerder</option>
-            </select>
 
             <label for="password">Wachtwoord</label>
             <input id="password" type="password" name="password" required>

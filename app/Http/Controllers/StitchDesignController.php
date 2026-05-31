@@ -141,24 +141,40 @@ class StitchDesignController extends Controller
     private function injectInteractionBridge(string $html, Request $request): string
     {
         $csrf = csrf_token();
+        $role = (string) ($request->user()?->role ?? '');
         $routes = [
-            'dashboard' => route('dashboard'),
             'logout' => route('logout'),
+            'root_dashboard' => route('dashboard'),
+
+            'admin_dashboard' => route('admin.dashboard'),
             'admin_students' => route('admin.students.index'),
             'admin_instructors' => route('admin.instructors.index'),
             'admin_finance' => route('admin.finance.index'),
             'admin_settings' => route('admin.settings.index'),
-            'approvals' => route('admin.approvals.index'),
+            'admin_approvals' => route('admin.approvals.index'),
+
+            'instructor_dashboard' => route('instructor.dashboard'),
+            'instructor_students' => route('instructor.students.index'),
+            'instructor_planning' => route('instructor.planning.index'),
+            'instructor_ris' => route('instructor.ris.index'),
+            'instructor_settings' => route('instructor.settings.index'),
+
+            'learner_dashboard' => route('learner.dashboard'),
+            'learner_planning' => route('learner.planning.index'),
+            'learner_progress' => route('learner.progress.index'),
+            'learner_progress_detail' => route('learner.progress.detail'),
+            'learner_invoices' => route('learner.invoices.index'),
+            'learner_theory' => route('learner.theory.index'),
         ];
 
         $routeJson = json_encode($routes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        $isAdminLike = $request->user()?->isRole('admin', 'beheerder') ? 'true' : 'false';
+        $roleJson = json_encode($role, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
         $script = <<<HTML
 <script>
 (function () {
   const routes = {$routeJson};
-  const isAdminLike = {$isAdminLike};
+  const role = {$roleJson};
 
   function postLogout() {
     const form = document.createElement('form');
@@ -173,24 +189,57 @@ class StitchDesignController extends Controller
     form.submit();
   }
 
+  function includesAny(text, terms) {
+    return terms.some((term) => text.includes(term));
+  }
+
+  function roleDashboard() {
+    if (role === 'admin' || role === 'beheerder') return routes.admin_dashboard;
+    if (role === 'instructeur') return routes.instructor_dashboard;
+    if (role === 'leerling') return routes.learner_dashboard;
+    return routes.root_dashboard;
+  }
+
   function routeForLabel(text) {
     const t = (text || '').trim().toLowerCase();
     if (!t) return null;
-    if (t.includes('uitloggen')) return '__logout__';
-    if (t.includes('dashboard')) return routes.dashboard;
-    if (t.includes('mijn leerlingen') || t.includes('leerlingen beheer')) return isAdminLike ? routes.admin_students : routes.dashboard;
-    if (t.includes('instructeurs')) return isAdminLike ? routes.admin_instructors : routes.dashboard;
-    if (t.includes('financi')) return isAdminLike ? routes.admin_finance : routes.dashboard;
-    if (t.includes('instellingen')) return isAdminLike ? routes.admin_settings : routes.dashboard;
-    if (t.includes('goedkeuren')) return isAdminLike ? routes.approvals : routes.dashboard;
-    if (t.includes('lesplanning')) return routes.dashboard;
-    if (t.includes('ris modules')) return routes.dashboard;
-    if (t.includes('snelkoppelingen') || t.includes('handleiding')) return routes.dashboard;
+
+    if (includesAny(t, ['uitloggen', 'logout'])) return '__logout__';
+    if (includesAny(t, ['dashboard', 'overzicht'])) return roleDashboard();
+
+    if (role === 'admin' || role === 'beheerder') {
+      if (includesAny(t, ['mijn leerlingen', 'leerlingen beheer', 'leerlingen'])) return routes.admin_students;
+      if (includesAny(t, ['instructeurs'])) return routes.admin_instructors;
+      if (includesAny(t, ['financi', 'facturen', 'omzet'])) return routes.admin_finance;
+      if (includesAny(t, ['instellingen'])) return routes.admin_settings;
+      if (includesAny(t, ['goedkeuren'])) return routes.admin_approvals;
+      if (includesAny(t, ['lesplanning', 'ris modules', 'snelkoppelingen', 'handleiding'])) return routes.admin_dashboard;
+      return null;
+    }
+
+    if (role === 'instructeur') {
+      if (includesAny(t, ['mijn leerlingen', 'leerlingen'])) return routes.instructor_students;
+      if (includesAny(t, ['lesplanning', 'nieuwe les inplannen', 'planning'])) return routes.instructor_planning;
+      if (includesAny(t, ['ris modules', 'voortgang'])) return routes.instructor_ris;
+      if (includesAny(t, ['instellingen'])) return routes.instructor_settings;
+      if (includesAny(t, ['snelkoppelingen', 'handleiding'])) return routes.instructor_dashboard;
+      return null;
+    }
+
+    if (role === 'leerling') {
+      if (includesAny(t, ['planning', 'rooster'])) return routes.learner_planning;
+      if (includesAny(t, ['voortgang'])) return routes.learner_progress;
+      if (includesAny(t, ['facturen', 'betalingen'])) return routes.learner_invoices;
+      if (includesAny(t, ['theorie'])) return routes.learner_theory;
+      if (includesAny(t, ['details'])) return routes.learner_progress_detail;
+      return null;
+    }
+
     return null;
   }
 
   document.addEventListener('click', function (event) {
-    const target = event.target.closest('a, button, span, div');
+    const target = event.target.closest('a, button');
     if (!target) return;
     const destination = routeForLabel(target.textContent);
     if (!destination) return;

@@ -7,7 +7,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Validation\Rule;
 use Illuminate\View\View;
 
 class AuthController extends Controller
@@ -28,26 +27,21 @@ class AuthController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255', 'unique:users,email'],
             'password' => ['required', 'confirmed', 'min:8'],
-            'role' => ['required', Rule::in([User::ROLE_LEERLING, User::ROLE_INSTRUCTEUR, User::ROLE_BEHEERDER])],
         ]);
-
-        $isLeerling = $validated['role'] === User::ROLE_LEERLING;
 
         User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
             'password' => $validated['password'],
-            'role' => $validated['role'],
-            'approval_status' => $isLeerling ? 'pending' : 'approved',
-            'approved_at' => $isLeerling ? null : now(),
+            'role' => User::ROLE_LEERLING,
+            'approval_status' => 'pending',
+            'approved_at' => null,
             'two_factor_enabled' => false,
         ]);
 
         return redirect()
             ->route('login')
-            ->with('status', $isLeerling
-                ? 'Registratie ontvangen. Je account wacht op goedkeuring door de rijschool.'
-                : 'Account aangemaakt. Je kunt nu inloggen.');
+            ->with('status', 'Registratie ontvangen. Je account wacht op goedkeuring door de rijschool.');
     }
 
     public function login(Request $request): RedirectResponse
