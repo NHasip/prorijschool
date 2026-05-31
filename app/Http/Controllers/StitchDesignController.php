@@ -29,8 +29,7 @@ class StitchDesignController extends Controller
 
     public function show(string $screenId): Response
     {
-        $screen = $this->findScreen($screenId);
-        $htmlPath = Arr::get($screen, 'html');
+        $htmlPath = $this->findHtmlPathByScreenId($screenId);
 
         if (! is_string($htmlPath) || ! is_file($htmlPath)) {
             throw new NotFoundHttpException("No HTML export found for screen {$screenId}.");
@@ -45,8 +44,7 @@ class StitchDesignController extends Controller
 
     public function screenshot(string $screenId): Response
     {
-        $screen = $this->findScreen($screenId);
-        $screenshotPath = Arr::get($screen, 'screenshot');
+        $screenshotPath = $this->findScreenshotPathByScreenId($screenId);
 
         if (! is_string($screenshotPath) || ! is_file($screenshotPath)) {
             throw new NotFoundHttpException("No screenshot found for screen {$screenId}.");
@@ -88,6 +86,38 @@ class StitchDesignController extends Controller
         }
 
         throw new NotFoundHttpException("Screen {$screenId} was not found in Stitch export.");
+    }
+
+    private function findHtmlPathByScreenId(string $screenId): ?string
+    {
+        foreach ($this->loadManifest() as $screen) {
+            if (($screen['screenId'] ?? null) === $screenId) {
+                $html = Arr::get($screen, 'html');
+                if (is_string($html) && is_file($html)) {
+                    return $html;
+                }
+                break;
+            }
+        }
+
+        $matches = glob($this->htmlDir.DIRECTORY_SEPARATOR.'*'.$screenId.'.html') ?: [];
+        return $matches[0] ?? null;
+    }
+
+    private function findScreenshotPathByScreenId(string $screenId): ?string
+    {
+        foreach ($this->loadManifest() as $screen) {
+            if (($screen['screenId'] ?? null) === $screenId) {
+                $shot = Arr::get($screen, 'screenshot');
+                if (is_string($shot) && is_file($shot)) {
+                    return $shot;
+                }
+                break;
+            }
+        }
+
+        $matches = glob($this->screenshotDir.DIRECTORY_SEPARATOR.'*'.$screenId.'.png') ?: [];
+        return $matches[0] ?? null;
     }
 
     private function normalizePath(?string $path, string $baseDir): ?string
