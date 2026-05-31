@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,7 +28,7 @@ class StitchDesignController extends Controller
         ]);
     }
 
-    public function show(string $screenId): Response
+    public function show(Request $request, string $screenId): Response
     {
         $htmlPath = $this->findHtmlPathByScreenId($screenId);
 
@@ -35,9 +36,10 @@ class StitchDesignController extends Controller
             throw new NotFoundHttpException("No HTML export found for screen {$screenId}.");
         }
 
-        $html = file_get_contents($htmlPath);
+        $html = file_get_contents($htmlPath) ?: '';
+        $html = $this->injectInteractionBridge($html, $request);
 
-        return response($html ?: '', 200, [
+        return response($html, 200, [
             'Content-Type' => 'text/html; charset=UTF-8',
         ]);
     }
@@ -134,5 +136,88 @@ class StitchDesignController extends Controller
         $candidate = $baseDir.DIRECTORY_SEPARATOR.$filename;
 
         return is_file($candidate) ? $candidate : null;
+    }
+
+    private function injectInteractionBridge(string $html, Request $request): string
+    {
+        $csrf = csrf_token();
+        $routes = [
+            'dashboard' => route('dashboard'),
+            'logout' => route('logout'),
+            'admin_students' => route('admin.students.index'),
+            'admin_instructors' => route('admin.instructors.index'),
+            'admin_finance' => route('admin.finance.index'),
+            'admin_settings' => route('admin.settings.index'),
+            'approvals' => route('admin.approvals.index'),
+        ];
+
+        $routeJson = json_encode($routes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
+        $isAdminLike = $request->user()?->isRole('admin', 'beheerder') ? 'true' : 'false';
+
+        $script = <<<HTML
+<script>
+(function () {
+  const routes = {$routeJson};
+  const isAdminLike = {$isAdminLike};
+
+  function postLogout() {
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = routes.logout;
+    const token = document.createElement('input');
+    token.type = 'hidden';
+    token.name = '_token';
+    token.value = document.querySelector('meta[name="csrf-token"]')?.content || '';
+    form.appendChild(token);
+    document.body.appendChild(form);
+    form.submit();
+  }
+
+  function routeForLabel(text) {
+    const t = (text || '').trim().toLowerCase();
+    if (!t) return null;
+    if (t.includes('uitloggen')) return '__logout__';
+    if (t.includes('dashboard')) return routes.dashboard;
+    if (t.includes('mijn leerlingen') || t.includes('leerlingen beheer')) return isAdminLike ? routes.admin_students : routes.dashboard;
+    if (t.includes('instructeurs')) return isAdminLike ? routes.admin_instructors : routes.dashboard;
+    if (t.includes('financi')) return isAdminLike ? routes.admin_finance : routes.dashboard;
+    if (t.includes('instellingen')) return isAdminLike ? routes.admin_settings : routes.dashboard;
+    if (t.includes('goedkeuren')) return isAdminLike ? routes.approvals : routes.dashboard;
+    if (t.includes('lesplanning')) return routes.dashboard;
+    if (t.includes('ris modules')) return routes.dashboard;
+    if (t.includes('snelkoppelingen') || t.includes('handleiding')) return routes.dashboard;
+    return null;
+  }
+
+  document.addEventListener('click', function (event) {
+    const target = event.target.closest('a, button, span, div');
+    if (!target) return;
+    const destination = routeForLabel(target.textContent);
+    if (!destination) return;
+    event.preventDefault();
+    event.stopPropagation();
+    if (destination === '__logout__') {
+      postLogout();
+      return;
+    }
+    window.location.href = destination;
+  }, true);
+})();
+</script>
+HTML;
+
+        if (str_contains($html, 'name="csrf-token"')) {
+            $htmlWithMeta = $html;
+        } elseif (str_contains($html, '</head>')) {
+            $htmlWithMeta = str_replace('</head>', '<meta name="csrf-token" content="'.$csrf.'"></head>', $html);
+        } else {
+            $htmlWithMeta = '<meta name="csrf-token" content="'.$csrf.'">'.$html;
+        }
+
+        if (str_contains($htmlWithMeta, '</body>')) {
+            return str_replace('</body>', $script.'</body>', $htmlWithMeta);
+        }
+
+        return $htmlWithMeta.$script;
     }
 }
