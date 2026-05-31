@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Leerlingen Goedkeuring'])
+@extends('layouts.portal', ['title' => 'Leerlingen Goedkeuring'])
 
 @section('content')
     <div class="card">

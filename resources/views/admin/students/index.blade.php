@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Leerlingenbeheer'])
+@extends('layouts.portal', ['title' => 'Leerlingenbeheer'])
 
 @section('content')
     <div class="card">
@@ -77,4 +77,3 @@
         </div>
     </div>
 @endsection
-

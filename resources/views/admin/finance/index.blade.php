@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Financien'])
+@extends('layouts.portal', ['title' => 'Financien'])
 
 @php
     $fmt = static fn (int $cents): string => 'EUR '.number_format($cents / 100, 2, ',', '.');
@@ -93,4 +93,3 @@
         </div>
     </div>
 @endsection
-
