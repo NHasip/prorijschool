@@ -6,6 +6,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Route;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class StitchDesignController extends Controller
@@ -143,28 +144,28 @@ class StitchDesignController extends Controller
         $csrf = csrf_token();
         $role = (string) ($request->user()?->role ?? '');
         $routes = [
-            'logout' => route('logout'),
-            'root_dashboard' => route('dashboard'),
+            'logout' => $this->routeOrNull('logout'),
+            'root_dashboard' => $this->routeOrNull('dashboard'),
 
-            'admin_dashboard' => route('admin.dashboard'),
-            'admin_students' => route('admin.students.index'),
-            'admin_instructors' => route('admin.instructors.index'),
-            'admin_finance' => route('admin.finance.index'),
-            'admin_settings' => route('admin.settings.index'),
-            'admin_approvals' => route('admin.approvals.index'),
+            'admin_dashboard' => $this->routeOrNull('admin.dashboard'),
+            'admin_students' => $this->routeOrNull('admin.students.index'),
+            'admin_instructors' => $this->routeOrNull('admin.instructors.index'),
+            'admin_finance' => $this->routeOrNull('admin.finance.index'),
+            'admin_settings' => $this->routeOrNull('admin.settings.index'),
+            'admin_approvals' => $this->routeOrNull('admin.approvals.index'),
 
-            'instructor_dashboard' => route('instructor.dashboard'),
-            'instructor_students' => route('instructor.students.index'),
-            'instructor_planning' => route('instructor.planning.index'),
-            'instructor_ris' => route('instructor.ris.index'),
-            'instructor_settings' => route('instructor.settings.index'),
+            'instructor_dashboard' => $this->routeOrNull('instructor.dashboard'),
+            'instructor_students' => $this->routeOrNull('instructor.students.index'),
+            'instructor_planning' => $this->routeOrNull('instructor.planning.index'),
+            'instructor_ris' => $this->routeOrNull('instructor.ris.index'),
+            'instructor_settings' => $this->routeOrNull('instructor.settings.index'),
 
-            'learner_dashboard' => route('learner.dashboard'),
-            'learner_planning' => route('learner.planning.index'),
-            'learner_progress' => route('learner.progress.index'),
-            'learner_progress_detail' => route('learner.progress.detail'),
-            'learner_invoices' => route('learner.invoices.index'),
-            'learner_theory' => route('learner.theory.index'),
+            'learner_dashboard' => $this->routeOrNull('learner.dashboard'),
+            'learner_planning' => $this->routeOrNull('learner.planning.index'),
+            'learner_progress' => $this->routeOrNull('learner.progress.index'),
+            'learner_progress_detail' => $this->routeOrNull('learner.progress.detail'),
+            'learner_invoices' => $this->routeOrNull('learner.invoices.index'),
+            'learner_theory' => $this->routeOrNull('learner.theory.index'),
         ];
 
         $routeJson = json_encode($routes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
@@ -268,5 +269,14 @@ HTML;
         }
 
         return $htmlWithMeta.$script;
+    }
+
+    private function routeOrNull(string $name): ?string
+    {
+        if (! Route::has($name)) {
+            return null;
+        }
+
+        return route($name);
     }
 }
