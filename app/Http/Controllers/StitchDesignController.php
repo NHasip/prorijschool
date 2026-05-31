@@ -250,6 +250,9 @@ class StitchDesignController extends Controller
       ? routes.admin_settings
       : (role === 'instructeur' ? routes.instructor_settings : null);
     const showPlannerButton = role !== 'leerling';
+    const roleSubtitle = role === 'instructeur'
+      ? 'Instructeur Portaal'
+      : (role === 'leerling' ? 'Leerling Portaal' : 'Admin Portaal');
 
     const navItemsHtml = items.map((item) => `
 <li>
@@ -275,6 +278,7 @@ class StitchDesignController extends Controller
     nav.innerHTML = `
 <div class="mb-lg px-sm">
   <h1 class="font-headline-md text-headline-md font-bold text-primary">Pro Rijschool</h1>
+  <p class="font-label-sm text-label-sm text-secondary mt-xs">${roleSubtitle}</p>
 </div>
 <ul class="flex flex-col gap-xs flex-1">${navItemsHtml}</ul>
 <div class="mt-auto border-t border-outline-variant pt-md px-sm">${plannerHtml}${settingsHtml}</div>`;
@@ -302,6 +306,14 @@ class StitchDesignController extends Controller
     <img alt="Profielfoto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_PEO-hz0FdzAU7XPdf7U7SAEXE-BPQwN7Zx13R8cq0QZiSAOgN9g1x201LE_s-lx6yLW_HwMJLka2OS2gtD-JBtWHhQT_Ss7AMk6M8NqzsL_EWOzBUk5NVJaHEg3qut0TbEMpO-ObML9l6ZCfFy6WXwIYmougUaQEY3-00v11q_ypOhxDxIZFZBy5EKwf9MesXbxH8iOcNt70Nlk5PSh6FA56HJmnScwJkFdosu-csBweONBDOCvMdoMHwY8QZ-CKwZ5OZbazYU4">
   </div>
 </div>`;
+
+    // Remove old role-title artifacts from original stitch header markup.
+    header.querySelectorAll('*').forEach((el) => {
+      const text = (el.textContent || '').trim();
+      if (text === 'Instructeur Portaal' || text === 'Leerling Portaal' || text === 'Admin Portaal') {
+        el.textContent = '';
+      }
+    });
   }
 
   function routeForLabel(text) {
