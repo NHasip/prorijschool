@@ -9,22 +9,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@600;700&family=Material+Symbols+Outlined:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #f4f6f5;
+            --bg: #eef4f3;
             --surface: #ffffff;
-            --border: #c4cec7;
-            --text: #1f2b38;
-            --muted: #5f6674;
+            --border: #bccabc;
+            --text: #121e1f;
+            --muted: #5f5e5e;
             --primary: #006d37;
-            --primary-soft: #eaf4ef;
-            --accent: #26ae60;
+            --primary-soft: #e9f6f7;
+            --accent: #27ae60;
             --sidebar-width: 260px;
-            --topbar-height: 72px;
+            --topbar-height: 64px;
         }
         * { box-sizing: border-box; }
         body { font-family: Inter, system-ui, sans-serif; background: var(--bg); color: var(--text); margin: 0; }
         .material-symbols-outlined {
             font-variation-settings: "FILL" 0, "wght" 350, "GRAD" 0, "opsz" 24;
-            font-size: 22px;
+            font-size: 20px;
             line-height: 1;
         }
         .shell { min-height: 100vh; }
@@ -34,7 +34,7 @@
             left: 0;
             width: var(--sidebar-width);
             height: 100vh;
-            background: #f1f4f2;
+            background: #ffffff;
             border-right: 1px solid var(--border);
             padding: 18px 12px 14px;
             display: flex;
@@ -45,13 +45,13 @@
         .brand h1 {
             margin: 0;
             color: var(--primary);
-            font-size: 46px;
-            line-height: 0.95;
+            font-size: 32px;
+            line-height: 1.15;
             font-family: Montserrat, Inter, system-ui, sans-serif;
             letter-spacing: -0.02em;
-            max-width: 180px;
+            max-width: 170px;
         }
-        .brand p { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
+        .brand p { margin: 6px 0 0; color: var(--muted); font-size: 12px; font-weight: 500; }
         .menu { display: flex; flex-direction: column; gap: 8px; flex: 1; }
         .menu a {
             display: flex;
@@ -63,7 +63,7 @@
             border-radius: 8px;
             font-weight: 600;
             border-right: 4px solid transparent;
-            font-size: 30px;
+            font-size: 14px;
             letter-spacing: 0.01em;
         }
         .menu a.active {
@@ -85,6 +85,7 @@
             font-weight: 600;
             border-radius: 8px;
             border-right: 4px solid transparent;
+            font-size: 14px;
         }
         .bottom-actions a.active {
             color: var(--primary);
@@ -105,12 +106,13 @@
         }
         .btn-primary-cta {
             background: var(--accent);
-            color: #072115;
+            color: #00391a;
             font-weight: 700;
             text-align: center;
             width: 100%;
             border-radius: 10px;
             padding: 11px 14px;
+            font-size: 14px;
         }
         .btn-muted {
             background: transparent;
@@ -138,7 +140,7 @@
             color: #1f2b38;
             text-decoration: none;
             font-weight: 600;
-            font-size: 28px;
+            font-size: 14px;
             letter-spacing: 0.01em;
         }
         .topbar-right { display: flex; align-items: center; gap: 14px; }
@@ -154,6 +156,7 @@
             padding: 8px 14px 8px 42px;
             color: #38505a;
             font-weight: 500;
+            font-size: 14px;
         }
         .search-wrap .material-symbols-outlined {
             position: absolute;
@@ -182,7 +185,7 @@
             color: #1f2b38;
             border: 0;
             font-weight: 700;
-            font-size: 30px;
+            font-size: 14px;
             padding: 0;
         }
         .profile-avatar {
@@ -195,7 +198,7 @@
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 13px;
             font-weight: 700;
             color: #24473f;
         }
@@ -237,7 +240,7 @@
 <div class="shell">
     <aside class="sidebar">
         <div class="brand">
-            <h1>Pro Rijschool</h1>
+            <h1>Pro<br>Rijschool</h1>
             <p>{{ $roleLabel }}</p>
         </div>
 
