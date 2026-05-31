@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminModuleController;
 use App\Http\Controllers\Admin\UserApprovalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
@@ -27,6 +28,12 @@ Route::middleware(['auth', 'approved', '2fa.verified'])->group(function (): void
     Route::post('/2fa/toggle', [TwoFactorController::class, 'toggle'])->name('2fa.toggle');
 
     Route::middleware('role:admin,beheerder')->prefix('admin')->name('admin.')->group(function (): void {
+        Route::get('/dashboard', [AdminModuleController::class, 'dashboard'])->name('dashboard');
+        Route::get('/leerlingen', [AdminModuleController::class, 'students'])->name('students.index');
+        Route::get('/instructeurs', [AdminModuleController::class, 'instructors'])->name('instructors.index');
+        Route::get('/financien', [AdminModuleController::class, 'finance'])->name('finance.index');
+        Route::get('/instellingen', [AdminModuleController::class, 'settings'])->name('settings.index');
+
         Route::get('/leerlingen-goedkeuring', [UserApprovalController::class, 'index'])->name('approvals.index');
         Route::post('/leerlingen/{user}/approve', [UserApprovalController::class, 'approve'])->name('approvals.approve');
         Route::post('/leerlingen/{user}/reject', [UserApprovalController::class, 'reject'])->name('approvals.reject');

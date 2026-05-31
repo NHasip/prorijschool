@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Hash;
@@ -94,5 +95,15 @@ class User extends Authenticatable
             'two_factor_code' => null,
             'two_factor_expires_at' => null,
         ])->save();
+    }
+
+    public function studentProfile(): HasOne
+    {
+        return $this->hasOne(Student::class);
+    }
+
+    public function instructorProfile(): HasOne
+    {
+        return $this->hasOne(Instructor::class);
     }
 }
