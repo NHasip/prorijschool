@@ -116,8 +116,8 @@
         }
         .portal-main h1 {
             margin: 0 0 12px;
-            font-size: 42px;
-            line-height: 1.2;
+            font-size: 32px;
+            line-height: 1.25;
             font-weight: 600;
             font-family: Montserrat, Inter, sans-serif;
             color: #121e1f;
@@ -125,20 +125,32 @@
         .portal-main h2 {
             margin: 0 0 10px;
             font-size: 24px;
-            line-height: 1.3;
+            line-height: 1.4;
             font-weight: 600;
             font-family: Montserrat, Inter, sans-serif;
             color: #121e1f;
         }
-        .portal-main p { margin: 0 0 8px; }
-        .portal-main .muted { color: #5f5e5e; font-size: 16px; line-height: 1.5; }
-        .portal-main label { display: block; font-weight: 600; margin: 10px 0 4px; }
+        .portal-main p { margin: 0 0 8px; font-size: 16px; line-height: 1.6; }
+        .portal-main .muted { color: #5f5e5e; font-size: 16px; line-height: 1.6; }
+        .portal-main label {
+            display: block;
+            font-weight: 600;
+            margin: 10px 0 4px;
+            font-size: 14px;
+            line-height: 1.4;
+            letter-spacing: 0.05em;
+            color: #121e1f;
+        }
         .portal-main input, .portal-main select {
             width: 100%;
             padding: 10px;
             border-radius: 8px;
             border: 1px solid #bccabc;
             background: #fff;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            color: #121e1f;
         }
         .portal-main button, .portal-main .btn {
             display: inline-block;
@@ -149,6 +161,10 @@
             padding: 10px 14px;
             text-decoration: none;
             font-weight: 600;
+            font-family: Inter, sans-serif;
+            font-size: 14px;
+            line-height: 1.4;
+            letter-spacing: 0.05em;
             cursor: pointer;
         }
         .portal-main .btn-muted { background: #334155; }
@@ -169,6 +185,8 @@
             border-bottom: 1px solid #d8e5e6;
             text-align: left;
             vertical-align: top;
+            font-size: 16px;
+            line-height: 1.6;
         }
     </style>
 </head>
