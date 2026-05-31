@@ -76,6 +76,13 @@ else
   "$PHP_BIN" artisan migrate --force
 fi
 
+echo "==> Seeding default data"
+if [[ "${SKIP_SEED:-0}" == "1" ]]; then
+  echo "==> SKIP_SEED=1 detected, skipping seed"
+else
+  "$PHP_BIN" artisan db:seed --force
+fi
+
 echo "==> Building framework caches"
 "$PHP_BIN" artisan optimize:clear
 "$PHP_BIN" artisan config:cache
