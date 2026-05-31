@@ -20,9 +20,9 @@ class AdminModuleController extends Controller
         return app(StudentManagementController::class)->index($request);
     }
 
-    public function instructors(Request $request): Response
+    public function instructors(Request $request): View
     {
-        return app(StitchDesignController::class)->show($request, '53228c93545c486793b47cb6c3437b68');
+        return app(InstructorManagementController::class)->index();
     }
 
     public function finance(Request $request): View
