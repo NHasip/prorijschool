@@ -237,29 +237,34 @@
     @endif
 </aside>
 
-<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-outline-variant flex justify-between items-center h-16 px-lg bg-white">
-    <div class="flex gap-md">
-        <a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-all" href="#">Snelkoppelingen</a>
-        <a class="text-on-surface-variant font-label-md text-label-md hover:text-primary transition-all" href="#">Handleiding</a>
+<header class="fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-outline-variant flex justify-between items-center h-16 px-lg ml-64 transition-all bg-white">
+    <div class="flex items-center gap-4">
+        <span class="font-headline-sm text-headline-sm font-bold text-primary">Momentum Drive</span>
+        <nav class="hidden lg:flex items-center gap-6 ml-lg">
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all scale-100 hover:scale-95 duration-100" href="#">Snelkoppelingen</a>
+            <a class="font-label-md text-label-md text-on-surface-variant hover:text-primary transition-all scale-100 hover:scale-95 duration-100" href="#">Handleiding</a>
+        </nav>
     </div>
-    <div class="flex items-center gap-md">
-        <div class="relative hidden lg:block">
-            <span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-secondary text-[18px]">search</span>
-            <input class="pl-xl pr-sm py-xs bg-surface-container-low border border-outline-variant rounded-full text-label-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all w-64" placeholder="Zoeken..." type="text">
+    <div class="flex items-center gap-6">
+        <div class="relative hidden md:block">
+            <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+            <input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-label-md focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container w-64 transition-all" placeholder="Zoeken..." type="text">
         </div>
-        <button class="text-secondary hover:text-primary transition-all hover:scale-95 duration-100 flex items-center" type="button">
-            <span class="material-symbols-outlined">notifications</span>
-        </button>
-        <button class="text-secondary hover:text-primary transition-all hover:scale-95 duration-100 flex items-center" type="button">
-            <span class="material-symbols-outlined">help_outline</span>
-        </button>
-        <div class="w-[1px] h-6 bg-outline-variant mx-xs"></div>
-        <form method="post" action="{{ route('logout') }}">
-            @csrf
-            <button class="font-label-md text-label-md text-secondary hover:text-primary transition-all" type="submit">Uitloggen</button>
-        </form>
-        <div class="w-8 h-8 rounded-full bg-secondary-container overflow-hidden border border-outline-variant">
-            <img alt="Profielfoto" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_PEO-hz0FdzAU7XPdf7U7SAEXE-BPQwN7Zx13R8cq0QZiSAOgN9g1x201LE_s-lx6yLW_HwMJLka2OS2gtD-JBtWHhQT_Ss7AMk6M8NqzsL_EWOzBUk5NVJaHEg3qut0TbEMpO-ObML9l6ZCfFy6WXwIYmougUaQEY3-00v11q_ypOhxDxIZFZBy5EKwf9MesXbxH8iOcNt70Nlk5PSh6FA56HJmnScwJkFdosu-csBweONBDOCvMdoMHwY8QZ-CKwZ5OZbazYU4">
+        <div class="flex items-center gap-3">
+            <button class="text-on-surface-variant hover:text-primary transition-colors relative" type="button">
+                <span class="material-symbols-outlined">notifications</span>
+                <span class="absolute top-0 right-0 w-2 h-2 bg-error rounded-full"></span>
+            </button>
+            <button class="text-on-surface-variant hover:text-primary transition-colors" type="button">
+                <span class="material-symbols-outlined">help_outline</span>
+            </button>
+        </div>
+        <div class="flex items-center gap-4 pl-4 border-l border-outline-variant">
+            <form method="post" action="{{ route('logout') }}">
+                @csrf
+                <button class="font-label-md text-label-md text-error hover:text-on-error-container transition-colors" type="submit">Uitloggen</button>
+            </form>
+            <img alt="Gebruiker" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCbVKDjd8c9ErPmLWdkASvzU-MdJa5IQvqkux6FcJe1eNt3w4jSOhu_mXdbctpmkHIgmABW2F3DQDhVMiet--rp5Gnf4IhegMpH8h_LaL0XlMlENDqKOlTmLLJXSguFpN_PIDNicF-ANw1HM_WnyiBDpr4js9H3TI0oc_y3w5ViyiLeePPs14ww-5j16oa6BAPcsEc8eKLU-9ol6Uv4TB5HKdIW5ZLgZaVCTSOZgtjBA-TlhlrHPS0nGtkd-jiZ5lDBSvOAmSmJNdo">
         </div>
     </div>
 </header>
@@ -282,4 +287,3 @@
 </main>
 </body>
 </html>
-
