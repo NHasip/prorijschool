@@ -15,8 +15,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        $legacyAdmin = User::query()->where('email', 'admin@prorijschool.nl')->first();
+        if ($legacyAdmin) {
+            $legacyAdmin->forceFill([
+                'email' => 'necip@necmar.nl',
+            ])->save();
+        }
+
         User::updateOrCreate([
-            'email' => 'admin@prorijschool.nl',
+            'email' => 'necip@necmar.nl',
         ], [
             'name' => 'Portal Admin',
             'password' => 'Admin123!secure',
