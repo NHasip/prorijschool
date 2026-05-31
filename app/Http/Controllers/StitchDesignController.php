@@ -224,25 +224,25 @@ class StitchDesignController extends Controller
 </div>
 <ul class="flex flex-col gap-xs flex-1">
   <li>
-    <a class="flex items-center gap-sm py-sm px-sm rounded-lg ${isActive('/instructeur/dashboard') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="${routeOrHash(routes.instructor_dashboard)}">
+    <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive('/instructeur/dashboard') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_dashboard)}">
       <span class="material-symbols-outlined text-[20px]">dashboard</span>
       <span class="font-label-md text-label-md">Dashboard</span>
     </a>
   </li>
   <li>
-    <a class="flex items-center gap-sm py-sm px-sm rounded-lg ${isActive('/instructeur/leerlingen') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="${routeOrHash(routes.instructor_students)}">
+    <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive('/instructeur/leerlingen') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_students)}">
       <span class="material-symbols-outlined text-[20px]">group</span>
       <span class="font-label-md text-label-md">Mijn Leerlingen</span>
     </a>
   </li>
   <li>
-    <a class="flex items-center gap-sm py-sm px-sm rounded-lg ${isActive('/instructeur/lesplanning') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="${routeOrHash(routes.instructor_planning)}">
+    <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive('/instructeur/lesplanning') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_planning)}">
       <span class="material-symbols-outlined text-[20px]">calendar_month</span>
       <span class="font-label-md text-label-md">Lesplanning</span>
     </a>
   </li>
   <li>
-    <a class="flex items-center gap-sm py-sm px-sm rounded-lg ${isActive('/instructeur/ris-modules') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="${routeOrHash(routes.instructor_ris)}">
+    <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive('/instructeur/ris-modules') ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_ris)}">
       <span class="material-symbols-outlined text-[20px]">list_alt</span>
       <span class="font-label-md text-label-md">RIS Modules</span>
     </a>
@@ -253,7 +253,7 @@ class StitchDesignController extends Controller
     <span class="material-symbols-outlined text-[18px]">add</span>
     Nieuwe Les Inplannen
   </button>
-  <a class="mt-sm flex items-center gap-sm py-sm rounded-lg ${isActive('/instructeur/instellingen') ? 'text-primary font-bold' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="${routeOrHash(routes.instructor_settings)}">
+  <a class="mt-sm flex items-center gap-sm py-sm rounded-lg \${isActive('/instructeur/instellingen') ? 'text-primary font-bold' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(routes.instructor_settings)}">
     <span class="material-symbols-outlined text-[20px]">settings</span>
     <span class="font-label-md text-label-md">Instellingen</span>
   </a>
