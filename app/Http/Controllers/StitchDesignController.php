@@ -171,11 +171,11 @@ class StitchDesignController extends Controller
         $routeJson = json_encode($routes, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $roleJson = json_encode($role, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
 
-        $script = <<<HTML
+        $scriptTemplate = <<<'HTML'
 <script>
 (function () {
-  const routes = {$routeJson};
-  const role = {$roleJson};
+  const routes = __ROUTES__;
+  const role = __ROLE__;
 
   function postLogout() {
     const form = document.createElement('form');
@@ -261,14 +261,14 @@ class StitchDesignController extends Controller
 
     const navItemsHtml = items.map((item) => `
 <li>
-  <a class="flex items-center gap-sm py-sm px-sm rounded-lg \${isActive(item.match) ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(item.href)}">
-    <span class="material-symbols-outlined text-[20px]">\${item.icon}</span>
-    <span class="font-label-md text-label-md">\${item.label}</span>
+  <a class="flex items-center gap-sm py-sm px-sm rounded-lg ${isActive(item.match) ? 'text-primary font-bold border-r-4 border-primary bg-surface-container-lowest opacity-80 duration-150' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="${routeOrHash(item.href)}">
+    <span class="material-symbols-outlined text-[20px]">${item.icon}</span>
+    <span class="font-label-md text-label-md">${item.label}</span>
   </a>
 </li>`).join('');
 
     const settingsHtml = settingsRoute ? `
-  <a class="mt-sm flex items-center gap-sm py-sm rounded-lg \${isActive('/instellingen') ? 'text-primary font-bold' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="\${routeOrHash(settingsRoute)}">
+  <a class="mt-sm flex items-center gap-sm py-sm rounded-lg ${isActive('/instellingen') ? 'text-primary font-bold' : 'text-secondary hover:bg-surface-container-low transition-colors duration-150'}" href="${routeOrHash(settingsRoute)}">
     <span class="material-symbols-outlined text-[20px]">settings</span>
     <span class="font-label-md text-label-md">Instellingen</span>
   </a>` : '';
@@ -283,10 +283,10 @@ class StitchDesignController extends Controller
     nav.innerHTML = `
 <div class="mb-lg px-sm">
   <h1 class="font-headline-md text-headline-md font-bold text-primary">Pro Rijschool</h1>
-  <p class="font-label-sm text-label-sm text-secondary mt-xs">\${title}</p>
+  <p class="font-label-sm text-label-sm text-secondary mt-xs">${title}</p>
 </div>
-<ul class="flex flex-col gap-xs flex-1">\${navItemsHtml}</ul>
-<div class="mt-auto border-t border-outline-variant pt-md px-sm">\${plannerHtml}\${settingsHtml}</div>`;
+<ul class="flex flex-col gap-xs flex-1">${navItemsHtml}</ul>
+<div class="mt-auto border-t border-outline-variant pt-md px-sm">${plannerHtml}${settingsHtml}</div>`;
 
     header.className = 'fixed top-0 right-0 w-[calc(100%-16rem)] z-40 border-b border-outline-variant flex justify-between items-center h-16 px-lg bg-white';
     header.innerHTML = `
@@ -369,6 +369,11 @@ class StitchDesignController extends Controller
 })();
 </script>
 HTML;
+        $script = str_replace(
+            ['__ROUTES__', '__ROLE__'],
+            [$routeJson, $roleJson],
+            $scriptTemplate
+        );
 
         if (str_contains($html, 'name="csrf-token"')) {
             $htmlWithMeta = $html;
