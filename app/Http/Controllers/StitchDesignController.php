@@ -215,13 +215,6 @@ class StitchDesignController extends Controller
     const path = window.location.pathname;
     const isActive = (segment) => segment && path.includes(segment);
 
-    const roleTitles = {
-      admin: 'Admin Portaal',
-      beheerder: 'Admin Portaal',
-      instructeur: 'Instructeur Portaal',
-      leerling: 'Leerling Portaal',
-    };
-
     const menuByRole = {
       admin: [
         { label: 'Dashboard', icon: 'dashboard', href: routes.admin_dashboard, match: '/admin/dashboard' },
@@ -257,7 +250,6 @@ class StitchDesignController extends Controller
       ? routes.admin_settings
       : (role === 'instructeur' ? routes.instructor_settings : null);
     const showPlannerButton = role !== 'leerling';
-    const title = roleTitles[role] || 'Portaal';
 
     const navItemsHtml = items.map((item) => `
 <li>
@@ -283,7 +275,6 @@ class StitchDesignController extends Controller
     nav.innerHTML = `
 <div class="mb-lg px-sm">
   <h1 class="font-headline-md text-headline-md font-bold text-primary">Pro Rijschool</h1>
-  <p class="font-label-sm text-label-sm text-secondary mt-xs">${title}</p>
 </div>
 <ul class="flex flex-col gap-xs flex-1">${navItemsHtml}</ul>
 <div class="mt-auto border-t border-outline-variant pt-md px-sm">${plannerHtml}${settingsHtml}</div>`;
