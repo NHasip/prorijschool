@@ -278,7 +278,7 @@ class StitchDesignController extends Controller
     nav.innerHTML = `
 <div class="mb-lg px-sm">
   <h1 class="font-headline-md text-headline-md font-bold text-primary">Pro Rijschool</h1>
-  <p class="font-label-sm text-label-sm text-secondary mt-xs">${roleSubtitle}</p>
+  <p data-portal-subtitle="1" class="font-label-sm text-label-sm text-secondary mt-xs">${roleSubtitle}</p>
 </div>
 <ul class="flex flex-col gap-xs flex-1">${navItemsHtml}</ul>
 <div class="mt-auto border-t border-outline-variant pt-md px-sm">${plannerHtml}${settingsHtml}</div>`;
@@ -312,6 +312,20 @@ class StitchDesignController extends Controller
       const text = (el.textContent || '').trim();
       if (text === 'Instructeur Portaal' || text === 'Leerling Portaal' || text === 'Admin Portaal') {
         el.textContent = '';
+      }
+    });
+
+    // Also remove any stray role labels near the top area, except the sidebar subtitle we own.
+    document.querySelectorAll('body *').forEach((el) => {
+      const node = el;
+      if (!(node instanceof HTMLElement)) return;
+      if (node.closest('[data-portal-subtitle="1"]')) return;
+      const text = (node.textContent || '').trim();
+      if (!text) return;
+      if (!['Instructeur Portaal', 'Leerling Portaal', 'Admin Portaal'].includes(text)) return;
+      const top = node.getBoundingClientRect().top;
+      if (top < 140) {
+        node.textContent = '';
       }
     });
   }
