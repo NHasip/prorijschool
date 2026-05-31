@@ -39,4 +39,9 @@ class Student extends Model
     {
         return $this->hasMany(Payment::class);
     }
+
+    public function lessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class);
+    }
 }

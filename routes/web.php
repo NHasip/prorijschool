@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminModuleController;
+use App\Http\Controllers\Admin\FinanceManagementController;
+use App\Http\Controllers\Admin\StudentManagementController;
 use App\Http\Controllers\Admin\UserApprovalController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\Instructor\LessonPlanningController;
 use App\Http\Controllers\Instructor\InstructorModuleController;
 use App\Http\Controllers\Learner\LearnerModuleController;
 use App\Http\Controllers\StitchDesignController;
@@ -32,8 +35,12 @@ Route::middleware(['auth', 'approved', '2fa.verified'])->group(function (): void
     Route::middleware('role:admin,beheerder')->prefix('admin')->name('admin.')->group(function (): void {
         Route::get('/dashboard', [AdminModuleController::class, 'dashboard'])->name('dashboard');
         Route::get('/leerlingen', [AdminModuleController::class, 'students'])->name('students.index');
+        Route::post('/leerlingen/{student}/koppel-instructeur', [StudentManagementController::class, 'assignInstructor'])->name('students.assign-instructor');
+        Route::post('/leerlingen/{student}/status', [StudentManagementController::class, 'updateStatus'])->name('students.update-status');
         Route::get('/instructeurs', [AdminModuleController::class, 'instructors'])->name('instructors.index');
         Route::get('/financien', [AdminModuleController::class, 'finance'])->name('finance.index');
+        Route::post('/financien/facturen/maak', [FinanceManagementController::class, 'createInvoice'])->name('finance.create-invoice');
+        Route::post('/financien/betalingen/{payment}/status', [FinanceManagementController::class, 'updatePaymentStatus'])->name('finance.update-payment-status');
         Route::get('/instellingen', [AdminModuleController::class, 'settings'])->name('settings.index');
 
         Route::get('/leerlingen-goedkeuring', [UserApprovalController::class, 'index'])->name('approvals.index');
@@ -45,6 +52,8 @@ Route::middleware(['auth', 'approved', '2fa.verified'])->group(function (): void
         Route::get('/dashboard', [InstructorModuleController::class, 'dashboard'])->name('dashboard');
         Route::get('/leerlingen', [InstructorModuleController::class, 'students'])->name('students.index');
         Route::get('/lesplanning', [InstructorModuleController::class, 'planning'])->name('planning.index');
+        Route::post('/lesplanning', [LessonPlanningController::class, 'store'])->name('planning.store');
+        Route::post('/lessen/{lesson}/status', [LessonPlanningController::class, 'updateStatus'])->name('planning.update-status');
         Route::get('/ris-modules', [InstructorModuleController::class, 'risModules'])->name('ris.index');
         Route::get('/instellingen', [InstructorModuleController::class, 'settings'])->name('settings.index');
     });

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -105,5 +106,15 @@ class User extends Authenticatable
     public function instructorProfile(): HasOne
     {
         return $this->hasOne(Instructor::class);
+    }
+
+    public function instructedStudents(): HasMany
+    {
+        return $this->hasMany(Student::class, 'instructor_user_id');
+    }
+
+    public function plannedLessons(): HasMany
+    {
+        return $this->hasMany(Lesson::class, 'instructor_user_id');
     }
 }
