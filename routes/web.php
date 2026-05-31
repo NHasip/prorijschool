@@ -12,7 +12,7 @@ Route::get('/', function () {
         return redirect()->route('dashboard');
     }
 
-    return app(StitchDesignController::class)->index();
+    return redirect()->route('login');
 });
 
 Route::middleware('guest')->group(function (): void {
