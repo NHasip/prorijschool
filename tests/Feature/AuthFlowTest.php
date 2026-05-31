@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 
 class AuthFlowTest extends TestCase
@@ -29,9 +28,9 @@ class AuthFlowTest extends TestCase
         ]);
     }
 
-    public function test_admin_login_redirects_to_two_factor_challenge(): void
+    public function test_admin_login_goes_to_dashboard_when_2fa_is_disabled(): void
     {
-        Mail::fake();
+        config()->set('auth.portal.two_factor_enabled', false);
 
         $admin = User::factory()->create([
             'email' => 'admin2@example.com',
@@ -47,8 +46,8 @@ class AuthFlowTest extends TestCase
             'password' => 'Secret123!',
         ]);
 
-        $response->assertRedirect('/2fa');
-        $this->assertGuest();
-        $this->assertEquals($admin->id, session('auth.2fa_user_id'));
+        $response->assertRedirect('/dashboard');
+        $this->assertAuthenticatedAs($admin);
+        $this->assertNull(session('auth.2fa_user_id'));
     }
 }

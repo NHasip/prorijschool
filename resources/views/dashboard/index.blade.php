@@ -5,7 +5,7 @@
         <h1>Dashboard</h1>
         <p>Welkom, <strong>{{ $user->name }}</strong>.</p>
         <p class="muted">Rol: {{ ucfirst($user->role) }}</p>
-        @if($user->isRole('leerling'))
+        @if(config('auth.portal.two_factor_enabled') && $user->isRole('leerling'))
             <p class="muted">2FA optioneel: {{ $user->two_factor_enabled ? 'Ingeschakeld' : 'Uitgeschakeld' }}</p>
         @endif
 
@@ -15,7 +15,7 @@
                 <button type="submit" class="btn btn-muted">Uitloggen</button>
             </form>
 
-            @if($user->isRole('leerling'))
+            @if(config('auth.portal.two_factor_enabled') && $user->isRole('leerling'))
                 <form method="post" action="{{ route('2fa.toggle') }}">
                     @csrf
                     <button type="submit">{{ $user->two_factor_enabled ? '2FA uitschakelen' : '2FA inschakelen' }}</button>

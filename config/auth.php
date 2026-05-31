@@ -114,4 +114,8 @@ return [
 
     'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
 
+    'portal' => [
+        'two_factor_enabled' => env('PORTAL_2FA_ENABLED', false),
+    ],
+
 ];

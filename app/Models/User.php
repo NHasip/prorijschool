@@ -66,6 +66,10 @@ class User extends Authenticatable
 
     public function requiresTwoFactor(): bool
     {
+        if (! config('auth.portal.two_factor_enabled', false)) {
+            return false;
+        }
+
         if ($this->isRole(self::ROLE_ADMIN, self::ROLE_INSTRUCTEUR)) {
             return true;
         }
