@@ -231,6 +231,7 @@
     $isAdminLike = in_array($role, ['admin', 'beheerder'], true);
     $roleLabel = $role === 'instructeur' ? 'Instructeur Portaal' : ($role === 'leerling' ? 'Leerling Portaal' : 'Admin Portaal');
     $initials = collect(explode(' ', (string) $user?->name))->filter()->map(fn ($p) => mb_substr($p, 0, 1))->take(2)->implode('');
+    $route = fn (string $name, string $fallback = '#') => \Illuminate\Support\Facades\Route::has($name) ? route($name) : $fallback;
 @endphp
 
 <div class="shell">
@@ -242,32 +243,32 @@
 
         <nav class="menu">
             @if($isAdminLike)
-                <a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
-                <a href="{{ route('admin.students.index') }}" class="{{ request()->routeIs('admin.students.*') ? 'active' : '' }}"><span class="material-symbols-outlined">group</span>Mijn Leerlingen</a>
-                <a href="{{ route('admin.instructors.index') }}" class="{{ request()->routeIs('admin.instructors.*') ? 'active' : '' }}"><span class="material-symbols-outlined">school</span>Instructeurs</a>
-                <a href="{{ route('admin.finance.index') }}" class="{{ request()->routeIs('admin.finance.*') ? 'active' : '' }}"><span class="material-symbols-outlined">payments</span>Financien</a>
+                <a href="{{ $route('admin.dashboard') }}" class="{{ request()->routeIs('admin.dashboard') ? 'active' : '' }}"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+                <a href="{{ $route('admin.students.index') }}" class="{{ request()->routeIs('admin.students.*') ? 'active' : '' }}"><span class="material-symbols-outlined">group</span>Mijn Leerlingen</a>
+                <a href="{{ $route('admin.instructors.index') }}" class="{{ request()->routeIs('admin.instructors.*') ? 'active' : '' }}"><span class="material-symbols-outlined">school</span>Instructeurs</a>
+                <a href="{{ $route('admin.finance.index') }}" class="{{ request()->routeIs('admin.finance.*') ? 'active' : '' }}"><span class="material-symbols-outlined">payments</span>Financien</a>
             @elseif($role === 'instructeur')
-                <a href="{{ route('instructor.dashboard') }}" class="{{ request()->routeIs('instructor.dashboard') ? 'active' : '' }}"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
-                <a href="{{ route('instructor.students.index') }}" class="{{ request()->routeIs('instructor.students.*') ? 'active' : '' }}"><span class="material-symbols-outlined">group</span>Mijn Leerlingen</a>
-                <a href="{{ route('instructor.planning.index') }}" class="{{ request()->routeIs('instructor.planning.*') ? 'active' : '' }}"><span class="material-symbols-outlined">calendar_month</span>Lesplanning</a>
-                <a href="{{ route('instructor.ris.index') }}" class="{{ request()->routeIs('instructor.ris.*') ? 'active' : '' }}"><span class="material-symbols-outlined">list_alt</span>RIS Modules</a>
+                <a href="{{ $route('instructor.dashboard') }}" class="{{ request()->routeIs('instructor.dashboard') ? 'active' : '' }}"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+                <a href="{{ $route('instructor.students.index') }}" class="{{ request()->routeIs('instructor.students.*') ? 'active' : '' }}"><span class="material-symbols-outlined">group</span>Mijn Leerlingen</a>
+                <a href="{{ $route('instructor.planning.index') }}" class="{{ request()->routeIs('instructor.planning.*') ? 'active' : '' }}"><span class="material-symbols-outlined">calendar_month</span>Lesplanning</a>
+                <a href="{{ $route('instructor.ris.index') }}" class="{{ request()->routeIs('instructor.ris.*') ? 'active' : '' }}"><span class="material-symbols-outlined">list_alt</span>RIS Modules</a>
             @elseif($role === 'leerling')
-                <a href="{{ route('learner.dashboard') }}" class="{{ request()->routeIs('learner.dashboard') ? 'active' : '' }}"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
-                <a href="{{ route('learner.planning.index') }}" class="{{ request()->routeIs('learner.planning.*') ? 'active' : '' }}"><span class="material-symbols-outlined">calendar_month</span>Planning</a>
-                <a href="{{ route('learner.progress.index') }}" class="{{ request()->routeIs('learner.progress.*') ? 'active' : '' }}"><span class="material-symbols-outlined">trending_up</span>Voortgang</a>
-                <a href="{{ route('learner.invoices.index') }}" class="{{ request()->routeIs('learner.invoices.*') ? 'active' : '' }}"><span class="material-symbols-outlined">receipt_long</span>Facturen</a>
-                <a href="{{ route('learner.theory.index') }}" class="{{ request()->routeIs('learner.theory.*') ? 'active' : '' }}"><span class="material-symbols-outlined">menu_book</span>Theorie</a>
+                <a href="{{ $route('learner.dashboard') }}" class="{{ request()->routeIs('learner.dashboard') ? 'active' : '' }}"><span class="material-symbols-outlined">dashboard</span>Dashboard</a>
+                <a href="{{ $route('learner.planning.index') }}" class="{{ request()->routeIs('learner.planning.*') ? 'active' : '' }}"><span class="material-symbols-outlined">calendar_month</span>Planning</a>
+                <a href="{{ $route('learner.progress.index') }}" class="{{ request()->routeIs('learner.progress.*') ? 'active' : '' }}"><span class="material-symbols-outlined">trending_up</span>Voortgang</a>
+                <a href="{{ $route('learner.invoices.index') }}" class="{{ request()->routeIs('learner.invoices.*') ? 'active' : '' }}"><span class="material-symbols-outlined">receipt_long</span>Facturen</a>
+                <a href="{{ $route('learner.theory.index') }}" class="{{ request()->routeIs('learner.theory.*') ? 'active' : '' }}"><span class="material-symbols-outlined">menu_book</span>Theorie</a>
             @endif
         </nav>
 
         @if($role !== 'leerling')
             <div class="bottom-actions">
                 @if($role === 'instructeur')
-                    <a class="btn-primary-cta" href="{{ route('instructor.planning.index') }}">+ Nieuwe Les Inplannen</a>
+                    <a class="btn-primary-cta" href="{{ $route('instructor.planning.index') }}">+ Nieuwe Les Inplannen</a>
                 @elseif($isAdminLike)
-                    <a class="btn-primary-cta" href="{{ route('admin.students.index') }}">+ Nieuwe Les Inplannen</a>
+                    <a class="btn-primary-cta" href="{{ $route('admin.students.index') }}">+ Nieuwe Les Inplannen</a>
                 @endif
-                <a href="{{ $isAdminLike ? route('admin.settings.index') : route('instructor.settings.index') }}" class="{{ request()->routeIs('*.settings.*') ? 'active' : '' }}">
+                <a href="{{ $isAdminLike ? $route('admin.settings.index') : $route('instructor.settings.index') }}" class="{{ request()->routeIs('*.settings.*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">settings</span>Instellingen
                 </a>
             </div>

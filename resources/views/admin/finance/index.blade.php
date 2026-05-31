@@ -2,6 +2,8 @@
 
 @php
     $fmt = static fn (int $cents): string => 'EUR '.number_format($cents / 100, 2, ',', '.');
+    $canCreateInvoice = \Illuminate\Support\Facades\Route::has('admin.finance.create-invoice');
+    $canUpdatePaymentStatus = \Illuminate\Support\Facades\Route::has('admin.finance.update-payment-status');
 @endphp
 
 @section('content')
@@ -17,7 +19,10 @@
 
     <div class="card">
         <h2>Nieuwe Factuur Maken</h2>
-        <form method="post" action="{{ route('admin.finance.create-invoice') }}">
+        @if(! $canCreateInvoice)
+            <p class="error">Financiele acties nog niet beschikbaar. Draai deploy opnieuw zodat de nieuwste routes geladen zijn.</p>
+        @endif
+        <form method="post" action="{{ $canCreateInvoice ? route('admin.finance.create-invoice') : '#' }}">
             @csrf
             <label for="student_id">Leerling</label>
             <select id="student_id" name="student_id" required>
@@ -40,7 +45,7 @@
             <input id="subtotal_eur" type="number" name="subtotal_eur" step="0.01" min="0.01" required>
 
             <div class="row" style="margin-top: 12px;">
-                <button type="submit">Factuur Maken (21% BTW)</button>
+                <button type="submit" @disabled(! $canCreateInvoice)>Factuur Maken (21% BTW)</button>
             </div>
         </form>
     </div>
@@ -69,14 +74,14 @@
                     <td>{{ $fmt($payment->amount_cents) }}</td>
                     <td>{{ $payment->invoice ? $fmt($payment->invoice->total_cents) : '-' }}</td>
                     <td>
-                        <form method="post" action="{{ route('admin.finance.update-payment-status', $payment) }}" class="row">
+                        <form method="post" action="{{ $canUpdatePaymentStatus ? route('admin.finance.update-payment-status', $payment) : '#' }}" class="row">
                             @csrf
                             <select name="status" style="width: 120px;">
                                 @foreach(['open', 'pending', 'paid', 'failed', 'cancelled'] as $status)
                                     <option value="{{ $status }}" @selected($payment->status === $status)>{{ $status }}</option>
                                 @endforeach
                             </select>
-                            <button type="submit">Opslaan</button>
+                            <button type="submit" @disabled(! $canUpdatePaymentStatus)>Opslaan</button>
                         </form>
                     </td>
                 </tr>
